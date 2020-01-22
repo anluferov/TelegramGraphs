@@ -16,6 +16,8 @@
 		CE00B89223D61DAF007685B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE00B89023D61DAF007685B0 /* LaunchScreen.storyboard */; };
 		CE00B89B23D61E38007685B0 /* GraphModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B89A23D61E38007685B0 /* GraphModel.swift */; };
 		CE00B89E23D622AC007685B0 /* chart_data.json in Resources */ = {isa = PBXBuildFile; fileRef = CE00B89D23D622AC007685B0 /* chart_data.json */; };
+		CEBC918F23D8B3C3007ACD9A /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC918E23D8B3C3007ACD9A /* GraphView.swift */; };
+		CEBC919423D8BFFA007ACD9A /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC919323D8BFFA007ACD9A /* Data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		CE00B89323D61DAF007685B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE00B89A23D61E38007685B0 /* GraphModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphModel.swift; sourceTree = "<group>"; };
 		CE00B89D23D622AC007685B0 /* chart_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = chart_data.json; sourceTree = "<group>"; };
+		CEBC918E23D8B3C3007ACD9A /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		CEBC919323D8BFFA007ACD9A /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,10 +67,10 @@
 			isa = PBXGroup;
 			children = (
 				CE00B89923D61E2B007685B0 /* Model */,
+				CEBC919023D8B3EE007ACD9A /* Views */,
 				CE00B88223D61DAE007685B0 /* AppDelegate.swift */,
 				CE00B88423D61DAE007685B0 /* SceneDelegate.swift */,
 				CE00B88623D61DAE007685B0 /* ViewController.swift */,
-				CE00B88823D61DAE007685B0 /* Main.storyboard */,
 				CE00B89D23D622AC007685B0 /* chart_data.json */,
 				CE00B88E23D61DAF007685B0 /* Assets.xcassets */,
 				CE00B89023D61DAF007685B0 /* LaunchScreen.storyboard */,
@@ -80,8 +84,18 @@
 			isa = PBXGroup;
 			children = (
 				CE00B89A23D61E38007685B0 /* GraphModel.swift */,
+				CEBC919323D8BFFA007ACD9A /* Data.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		CEBC919023D8B3EE007ACD9A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CE00B88823D61DAE007685B0 /* Main.storyboard */,
+				CEBC918E23D8B3C3007ACD9A /* GraphView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,11 +170,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEBC919423D8BFFA007ACD9A /* Data.swift in Sources */,
 				CE00B88723D61DAE007685B0 /* ViewController.swift in Sources */,
 				CE00B88D23D61DAE007685B0 /* TelegramGraphs.xcdatamodeld in Sources */,
 				CE00B88323D61DAE007685B0 /* AppDelegate.swift in Sources */,
 				CE00B88523D61DAE007685B0 /* SceneDelegate.swift in Sources */,
 				CE00B89B23D61E38007685B0 /* GraphModel.swift in Sources */,
+				CEBC918F23D8B3C3007ACD9A /* GraphView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
