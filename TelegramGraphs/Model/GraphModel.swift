@@ -5,34 +5,6 @@
 //  Created by AP Andrey Luferau on 1/21/20.
 //  Copyright © 2020 AP Andrey Luferau. All rights reserved.
 
-
-//import Foundation
-//
-//class GraphModel: Decodable {
-//
-//    let columnsArrays: [[String]]
-//    let typesTulpins: [String:String]
-//    let namesTulpins: [String:String]
-//    let colorsTulpins: [String:String]
-//
-//    enum CraphModelRootKeys: String, CodingKey {
-//        case columnsArrays = "columns"
-//        case typesTulpins = "types"
-//        case namesTulpins = "names"
-//        case colorsTulpins = "colors"
-//    }
-//
-//    required init(from decoder: Decoder) throws {
-//        let rootContainer = try decoder.container(keyedBy: CraphModelRootKeys.self)
-//
-//        self.columnsArrays = try rootContainer.decode([[String]].self, forKey: .columnsArrays)
-//        self.typesTulpins = try rootContainer.decode([String:String].self, forKey: .typesTulpins)
-//        self.namesTulpins = try rootContainer.decode([String:String].self, forKey: .namesTulpins)
-//        self.colorsTulpins = try rootContainer.decode([String:String].self, forKey: .colorsTulpins)
-//    }
-//}
-
-
 // This file was generated from JSON Schema using quicktype, do not modify it directly.
 // To parse the JSON, add this file to your project and do:
 //
