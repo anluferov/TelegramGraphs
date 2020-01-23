@@ -17,39 +17,42 @@ class GraphView: UIView {
         static let bottomBorder: CGFloat = 50
         static let colorAlpha: CGFloat = 1
     }
-    private var graphPoints: [Float] = [0.0,0.0,0.0,0.0,25,0,25.0,17.0,17.0,22.0,22.0,0.0,15.0,15.0,0.0,0.0,0.0]
-    private var circleLayer: CAShapeLayer!
 
     override func draw(_ rect: CGRect) {
 
-        //x points
-        let width = rect.width
-        let margin = Constant.margin
-        let graphWidth = width - 2 * Constant.margin
+        let graphWidth = rect.width - 2 * Constant.margin
+        let graphHeight = rect.height - Constant.topBorder - Constant.bottomBorder
 
-        let xPointsCount = graphData[0].timeX.count
+        makeGraphs(for: graphData[4], graphWidth, graphHeight)
+    }
+
+    func makeGraphs(for lines: GraphArray, _ graphWidth: CGFloat, _ graphHeight: CGFloat) {
+        //x points
+        let xPointsCount = lines.timeX.count
 
         let columnXPoint = {
             (column: Float) -> CGFloat in
             let spacing = graphWidth / CGFloat(xPointsCount - 1)
-            return CGFloat(column) * spacing + margin
+            return CGFloat(column) * spacing + Constant.margin
         }
-        
-        // y points
-        let height = rect.height
-        let topBorder = Constant.topBorder
-        let bottomBorder = Constant.bottomBorder
-        let graphHeight = height - topBorder - bottomBorder
 
-        let yPoints = graphData[0].lines[0].points
-        let maxYPoint = graphData[0].lines[0].points.max()!
+        lines.lines.forEach {
+            makeSingleGraph(for: $0, with: columnXPoint, graphHeight)
+        }
+    }
+
+    private func makeSingleGraph(for line: Graph, with columnXPoint: (Float) -> CGFloat, _ graphHeight: CGFloat) {
+        //y points
+        let yPoints = line.points
+        let maxYPoint = line.points.max()!
 
         let columnYPoint = {
             (yPoint: Int) -> CGFloat in
             let y = CGFloat(yPoint) * (graphHeight / CGFloat(maxYPoint))
-            return graphHeight + topBorder - y
+            return graphHeight + Constant.topBorder - y
         }
 
+        //drawing of graphs
         let graphPath = UIBezierPath()
         graphPath.move(to: CGPoint(x: columnXPoint(0), y: columnYPoint(yPoints[0])))
 
@@ -60,7 +63,7 @@ class GraphView: UIView {
 
         graphPath.lineWidth = 2
 
-        let color = graphData[0].lines[0].color!
+        let color = line.color!
         color.setStroke()
         graphPath.stroke()
     }
