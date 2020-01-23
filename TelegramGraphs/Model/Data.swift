@@ -30,7 +30,7 @@ func convertIntoInternalFormat(from data: GraphJSONModelElement) -> GraphArray {
 
     let dateFormatter = DateFormatter()
     dateFormatter.locale = Locale(identifier: "en-US")
-    dateFormatter.setLocalizedDateFormatFromTemplate("MMM d yyyy")
+    dateFormatter.setLocalizedDateFormatFromTemplate("MMM dd")
 
     var graphArray = GraphArray()
     var nameLine = ""

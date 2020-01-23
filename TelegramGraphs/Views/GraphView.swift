@@ -23,7 +23,7 @@ class GraphView: UIView {
         let graphWidth = rect.width - 2 * Constant.margin
         let graphHeight = rect.height - Constant.topBorder - Constant.bottomBorder
 
-        makeGraphs(for: graphData[4], graphWidth, graphHeight)
+        makeGraphs(for: graphData[3], graphWidth, graphHeight)
     }
 
     func makeGraphs(for lines: GraphArray, _ graphWidth: CGFloat, _ graphHeight: CGFloat) {
