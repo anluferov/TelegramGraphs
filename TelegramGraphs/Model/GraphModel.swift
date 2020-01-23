@@ -60,15 +60,15 @@ enum Column: Codable {
 //MARK: - interanl format of graph data
 
 struct GraphArray {
-    var id: Int = 0
-    var nameX = ""
+    var nameX: String?
     var timeX = [String]()
+    var colorX: UIColor?
     var lines = [Graph]()
 }
 
 struct Graph {
     var id: Int = 0
-    var name = ""
+    var name: String?
     var type: String?
     var color: UIColor?
     var isHidden: Bool = false

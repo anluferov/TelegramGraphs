@@ -10,13 +10,17 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    var chartData = GraphJSONModel()
-    var linesArray = [GraphArray]()
+    let dataConverter = DataConverter()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let graphJSOONData = dataConverter.getDataFromJSON(withName: "chart_data")
+        let graphData = graphJSOONData.map {
+            dataConverter.convertIntoInternalFormat(from: $0)
+        }
 
+        print(graphData)
     }
 
 

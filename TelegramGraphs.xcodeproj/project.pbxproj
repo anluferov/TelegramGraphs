@@ -18,6 +18,7 @@
 		CE00B89E23D622AC007685B0 /* chart_data.json in Resources */ = {isa = PBXBuildFile; fileRef = CE00B89D23D622AC007685B0 /* chart_data.json */; };
 		CEBC918F23D8B3C3007ACD9A /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC918E23D8B3C3007ACD9A /* GraphView.swift */; };
 		CEBC919423D8BFFA007ACD9A /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC919323D8BFFA007ACD9A /* Data.swift */; };
+		CEBC919823D98F59007ACD9A /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC919723D98F59007ACD9A /* String+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		CE00B89D23D622AC007685B0 /* chart_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = chart_data.json; sourceTree = "<group>"; };
 		CEBC918E23D8B3C3007ACD9A /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		CEBC919323D8BFFA007ACD9A /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		CEBC919723D98F59007ACD9A /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 		CE00B88123D61DAE007685B0 /* TelegramGraphs */ = {
 			isa = PBXGroup;
 			children = (
+				CEBC919923D98F63007ACD9A /* Extension */,
 				CE00B89923D61E2B007685B0 /* Model */,
 				CEBC919023D8B3EE007ACD9A /* Views */,
 				CE00B88223D61DAE007685B0 /* AppDelegate.swift */,
@@ -96,6 +99,14 @@
 				CEBC918E23D8B3C3007ACD9A /* GraphView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		CEBC919923D98F63007ACD9A /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				CEBC919723D98F59007ACD9A /* String+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,6 +188,7 @@
 				CE00B88523D61DAE007685B0 /* SceneDelegate.swift in Sources */,
 				CE00B89B23D61E38007685B0 /* GraphModel.swift in Sources */,
 				CEBC918F23D8B3C3007ACD9A /* GraphView.swift in Sources */,
+				CEBC919823D98F59007ACD9A /* String+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

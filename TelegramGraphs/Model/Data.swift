@@ -11,32 +11,87 @@ import Foundation
 var graphJSON = GraphJSONModel()
 var graphArray = GraphArray()
 
-func getDataFromJSON(withName file: String) -> GraphJSONModel {
-    if let path = Bundle.main.path(forResource: file, ofType: "json") {
-        do {
-            let chartDataFile = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-            graphJSON = try JSONDecoder().decode(GraphJSONModel.self, from: chartDataFile)
-          } catch {
-               print(error)
-          }
+class DataConverter {
+    func getDataFromJSON(withName file: String) -> GraphJSONModel {
+        if let path = Bundle.main.path(forResource: file, ofType: "json") {
+            do {
+                let chartDataFile = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                graphJSON = try JSONDecoder().decode(GraphJSONModel.self, from: chartDataFile)
+              } catch {
+                   print(error)
+              }
+        }
+        return graphJSON
     }
-    return graphJSON
+
+    func convertIntoInternalFormat(from data: GraphJSONModelElement) -> GraphArray {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en-US")
+        dateFormatter.setLocalizedDateFormatFromTemplate("MMM d yyyy")
+
+        var nameLine = ""
+        var values = [Int]()
+        var lines = [Graph]()
+
+        for line in data.columns {
+            for element in line {
+                switch element {
+                    case .integer(let value): values.append(value)
+                    case .string(let name): nameLine = name
+                }
+            }
+
+            switch nameLine {
+                case "x":
+                    graphArray.nameX = nameLine
+                    graphArray.colorX = data.colors.x != nil ? data.colors.x!.hexStringToUIColor() : nil
+                    graphArray.timeX = values.map{
+                        dateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval($0/1000)))
+                    }
+                case "y0":
+                    lines.append(Graph(id: lines.count,
+                                       name: data.names.y0,
+                                       type: data.types.y0,
+                                       color: data.colors.y0.hexStringToUIColor(),
+                                       isHidden: false,
+                                       points: values,
+                                       countY: values.count))
+                case "y1":
+                    lines.append(Graph(id: lines.count,
+                                       name: data.names.y1,
+                                       type: data.types.y1,
+                                       color: data.colors.y1.hexStringToUIColor(),
+                                       isHidden: false,
+                                       points: values,
+                                       countY: values.count))
+                case "y2":
+                    lines.append(Graph(id: lines.count,
+                                       name: data.names.y2!,
+                                       type: data.types.y2!,
+                                       color: data.colors.y2 != nil ? data.colors.y2!.hexStringToUIColor() : nil,
+                                       isHidden: false,
+                                       points: values,
+                                       countY: values.count))
+                case "y3":
+                    lines.append(Graph(id: lines.count,
+                                       name: data.names.y3!,
+                                       type: data.types.y3!,
+                                       color: data.colors.y3 != nil ? data.colors.y3!.hexStringToUIColor() : nil,
+                                       isHidden: false,
+                                       points: values,
+                                       countY: values.count))
+                default: break
+            }
+
+            nameLine = ""
+            values = [Int]()
+        }
+
+        graphArray.lines = lines
+
+        return graphArray
+    }
 }
 
-func convertIntoInternalFormat(from data: GraphJSONModel) -> [GraphArray] {
 
-    //                linesArray = chartData.map{
-    //
-    //                    let date = NSDate(timeIntervalSince1970: TimeInterval(milliseconds))
-    //                    let formatter = DateFormatter()
-    //                    formatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
-    //                    formatter.locale = NSLocale(localeIdentifier: "en_US") as Locale!
-    //                    print(formatter.string(from: date as Date))
-    //
-    //                    output:
-    //
-    //                    LinesArray(id: <#T##Int#>, nameX: <#T##String#>, timeX: <#T##[String]#>, lines: <#T##[Line]#>)
-    //                }
-
-    return [GraphArray]()
-}
