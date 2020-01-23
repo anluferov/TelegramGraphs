@@ -21,37 +21,46 @@ class GraphView: UIView {
     private var circleLayer: CAShapeLayer!
 
     override func draw(_ rect: CGRect) {
+
+        //x points
         let width = rect.width
         let margin = Constant.margin
-        let graphWidth = width - 2 * margin
+        let graphWidth = width - 2 * Constant.margin
+
+        let xPointsCount = graphData[0].timeX.count
 
         let columnXPoint = {
             (column: Float) -> CGFloat in
-            let spacing = graphWidth / CGFloat(self.graphPoints.count-1)
+            let spacing = graphWidth / CGFloat(xPointsCount - 1)
             return CGFloat(column) * spacing + margin
         }
-
+        
+        // y points
         let height = rect.height
-        let graphHeight = height - Constant.topBorder - Constant.bottomBorder
-        let maxValue = graphPoints.max()!
+        let topBorder = Constant.topBorder
+        let bottomBorder = Constant.bottomBorder
+        let graphHeight = height - topBorder - bottomBorder
+
+        let yPoints = graphData[0].lines[0].points
+        let maxYPoint = graphData[0].lines[0].points.max()!
 
         let columnYPoint = {
-            (graphPoint: Float) -> CGFloat in
-            let y = CGFloat(graphPoint) * (graphHeight / CGFloat(maxValue))
-            return graphHeight + Constant.topBorder - y
+            (yPoint: Int) -> CGFloat in
+            let y = CGFloat(yPoint) * (graphHeight / CGFloat(maxYPoint))
+            return graphHeight + topBorder - y
         }
 
         let graphPath = UIBezierPath()
-        graphPath.move(to: CGPoint(x: columnXPoint(0), y: columnYPoint(graphPoints[0])))
+        graphPath.move(to: CGPoint(x: columnXPoint(0), y: columnYPoint(yPoints[0])))
 
-        for (index, value) in graphPoints.enumerated() {
+        for (index, value) in yPoints.enumerated() {
             let nextPoint = CGPoint(x: columnXPoint(Float(index)), y: columnYPoint(value))
             graphPath.addLine(to: nextPoint)
         }
 
         graphPath.lineWidth = 2
 
-        let color = UIColor.red
+        let color = graphData[0].lines[0].color!
         color.setStroke()
         graphPath.stroke()
     }
