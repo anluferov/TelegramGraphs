@@ -143,7 +143,7 @@ class GraphView: UIView {
 
     private func addXAxisLabel(for lines: GraphArray, _ graphWidth: CGFloat, _ graphHeight: CGFloat) {
 
-        let spacingCount = Constant.countXValues - 1
+        let spacingCount = Constant.countXValues
         let labelShiftY = CGFloat(5.0)
         let labelShiftX = CGFloat(5.0)
 
@@ -163,7 +163,6 @@ class GraphView: UIView {
             xLabelPosition += spacing
             valueIndex += spacingInIndex
         }
-
 
 
         labelInfoArray.forEach {
