@@ -10,12 +10,11 @@ import UIKit
 
 class GraphView: UIView {
 
-    @IBInspectable var lainColor: UIColor = .green
     private struct Constant {
-        static let margin: CGFloat = 0.0
+        static let margin: CGFloat = 10.0
         static let topBorder: CGFloat = 50
         static let bottomBorder: CGFloat = 50
-        static let colorAlpha: CGFloat = 1
+        static let countHorizontalLine = 6
     }
 
     override func draw(_ rect: CGRect) {
@@ -23,10 +22,11 @@ class GraphView: UIView {
         let graphWidth = rect.width - 2 * Constant.margin
         let graphHeight = rect.height - Constant.topBorder - Constant.bottomBorder
 
-        makeGraphs(for: graphData[3], graphWidth, graphHeight)
+        makeGraphs(for: graphData[0], graphWidth, graphHeight)
+        drawAxisLines(rect.height, graphWidth)
     }
 
-    func makeGraphs(for lines: GraphArray, _ graphWidth: CGFloat, _ graphHeight: CGFloat) {
+    private func makeGraphs(for lines: GraphArray, _ graphWidth: CGFloat, _ graphHeight: CGFloat) {
         //x points
         let xPointsCount = lines.timeX.count
 
@@ -66,6 +66,35 @@ class GraphView: UIView {
         let color = line.color!
         color.setStroke()
         graphPath.stroke()
+    }
+
+    private func drawAxisLines(_ viewHeight: CGFloat, _ graphWidth: CGFloat) {
+        let maxXCoordinate = Constant.margin + graphWidth
+        let spacingCount = Constant.countHorizontalLine
+
+        let maxYPoint = graphData[0].lines[0].points.max()!
+        let spacingPoint = maxYPoint / spacingCount
+
+        var spacingPointsArray = [Int]()
+
+        var yPoints = spacingPoint
+        for _ in 0..<spacingCount {
+            spacingPointsArray.append(yPoints)
+            yPoints += spacingPoint
+        }
+
+        spacingPointsArray.forEach {
+            let spacingCoordinate = CGFloat($0) * (viewHeight / CGFloat(maxYPoint))
+            let horizontalLine = UIBezierPath()
+            horizontalLine.move(to: CGPoint(x: Constant.margin, y: spacingCoordinate))
+            horizontalLine.addLine(to: CGPoint(x: maxXCoordinate, y: spacingCoordinate))
+
+            let color = UIColor.lightGray
+            color.setStroke()
+
+            horizontalLine.lineWidth = 1.5
+            horizontalLine.stroke(with: .normal, alpha: 0.2)
+        }
     }
 
 }
