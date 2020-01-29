@@ -8,69 +8,75 @@
 
 import UIKit
 
-class GraphView: UIView {
+class GraphView: UIImageView {
 
     private struct Constant {
-        static let margin: CGFloat = 10.0
-        static let topBorder: CGFloat = 20
-        static let bottomBorder: CGFloat = 20
+        static let margin: CGFloat = 20
+        static let topBorder: CGFloat = 10.0
+        static let bottomBorder: CGFloat = 10.0
         static let countHorizontalLine = 6
         static let countXValues = 6
     }
+
+    let graphArray = graphData[0]
+
+//    required init?(coder: NSCoder) {
+//        super.init(coder: coder)
+//        makeGraphs(for: graphArray)
+//    }
 
     override func draw(_ rect: CGRect) {
 
         let graphWidth = rect.width - 2 * Constant.margin
         let graphHeight = rect.height - Constant.topBorder - Constant.bottomBorder
-        let graphArray = graphData[0]
 
         drawAxesGrid(for: graphArray, graphWidth, graphHeight)
         addYAxisLabel(for: graphArray, graphWidth, graphHeight)
         addXAxisLabel(for: graphArray, graphWidth, graphHeight)
-
-        makeGraphs(for: graphArray, graphWidth, graphHeight)
     }
 
-    private func makeGraphs(for lines: GraphArray, _ graphWidth: CGFloat, _ graphHeight: CGFloat) {
-        //x points
+    func makeGraphs(for lines: GraphArray) {
+
+        let graphWidth = self.bounds.width - 2 * Constant.margin
+        let graphHeight = self.bounds.height - Constant.topBorder - Constant.bottomBorder
+
+        // calculate x points
         let xPointsCount = lines.timeX.count
 
         let columnXPoint = {
             (column: Float) -> CGFloat in
             let spacing = graphWidth / CGFloat(xPointsCount - 1)
-            return CGFloat(column) * spacing + Constant.margin
+            return CGFloat(column) * spacing
         }
 
-        lines.lines.forEach {
-            makeSingleGraph(for: $0, with: columnXPoint, graphHeight)
+        // drawing of graphs
+        let renderer = UIGraphicsImageRenderer(size: CGSize(width: graphWidth, height: graphHeight))
+
+        let graphImage = renderer.image{ (context) in
+            // calculate y points
+            lines.lines.forEach {
+                context.cgContext.setStrokeColor($0.color!.cgColor)
+
+                let yPoints = $0.points
+                let maxYPoint = $0.points.max()!
+                let columnYPoint = {
+                    (yPoint: Int) -> CGFloat in
+                    let y = CGFloat(yPoint) * (graphHeight / CGFloat(maxYPoint))
+                    return graphHeight - y
+                }
+
+                context.cgContext.move(to: CGPoint(x: columnXPoint(0), y: columnYPoint(yPoints[0])))
+                for (index, value) in yPoints.enumerated() {
+                    let nextPoint = CGPoint(x: columnXPoint(Float(index)), y: columnYPoint(value))
+                    context.cgContext.addLine(to: nextPoint)
+                }
+
+                context.cgContext.setLineWidth(2.0)
+                context.cgContext.drawPath(using: .stroke)
+            }
         }
-    }
 
-    private func makeSingleGraph(for line: Graph, with columnXPoint: (Float) -> CGFloat, _ graphHeight: CGFloat) {
-        //y points
-        let yPoints = line.points
-        let maxYPoint = line.points.max()!
-
-        let columnYPoint = {
-            (yPoint: Int) -> CGFloat in
-            let y = CGFloat(yPoint) * (graphHeight / CGFloat(maxYPoint))
-            return graphHeight + Constant.topBorder - y
-        }
-
-        //drawing of graphs
-        let graphPath = UIBezierPath()
-        graphPath.move(to: CGPoint(x: columnXPoint(0), y: columnYPoint(yPoints[0])))
-
-        for (index, value) in yPoints.enumerated() {
-            let nextPoint = CGPoint(x: columnXPoint(Float(index)), y: columnYPoint(value))
-            graphPath.addLine(to: nextPoint)
-        }
-
-        graphPath.lineWidth = 2
-
-        let color = line.color!
-        color.setStroke()
-        graphPath.stroke()
+        self.image = graphImage
     }
 
     private func drawAxesGrid(for lines: GraphArray, _ graphWidth: CGFloat, _ graphHeight: CGFloat) {
