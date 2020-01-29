@@ -41,15 +41,21 @@ class GraphView: UIView {
             return CGFloat(column) * spacing + Constant.margin
         }
 
+        var maxYPoint = 0
         lines.lines.forEach {
-            makeSingleGraph(for: $0, with: columnXPoint, graphHeight)
+            if $0.points.max()! > maxYPoint {
+                maxYPoint = $0.points.max()!
+            }
+        }
+
+        lines.lines.forEach {
+            makeSingleGraph(for: $0, with: columnXPoint, graphHeight, maxYPoint: maxYPoint)
         }
     }
 
-    private func makeSingleGraph(for line: Graph, with columnXPoint: (Float) -> CGFloat, _ graphHeight: CGFloat) {
+    private func makeSingleGraph(for line: Graph, with columnXPoint: (Float) -> CGFloat, _ graphHeight: CGFloat, maxYPoint: Int) {
         //y points
         let yPoints = line.points
-        let maxYPoint = line.points.max()!
 
         let columnYPoint = {
             (yPoint: Int) -> CGFloat in
