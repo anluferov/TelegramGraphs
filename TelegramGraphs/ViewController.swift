@@ -17,6 +17,9 @@ class ViewController: UIViewController {
     }
 
     @IBAction func buttonAction(_ sender: Any) {
+        graphData[0].lines[0].isHidden = true
+        graphView.needToRedraw = true
+        
         graphView.setNeedsDisplay()
     }
 

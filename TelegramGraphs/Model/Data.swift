@@ -8,7 +8,7 @@
 
 import Foundation
 
-let graphData = getDataFromJSON(withName: "chart_data").map {
+var graphData = getDataFromJSON(withName: "chart_data").map {
     convertIntoInternalFormat(from: $0)
 }
 

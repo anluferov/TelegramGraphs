@@ -11,6 +11,8 @@ import UIKit
 class GraphView: UIView {
 
     let drawer = Drawer()
+    let lineLayer = CAShapeLayer()
+    var needToRedraw = false
 
     override func draw(_ rect: CGRect) {
 
@@ -22,7 +24,14 @@ class GraphView: UIView {
         drawer.addYAxisLabel(for: graphArray, graphWidth, graphHeight, on: self)
         drawer.addXAxisLabel(for: graphArray, graphWidth, graphHeight, on: self)
 
-        drawer.makeGraphs(for: graphArray, graphWidth, graphHeight)
+        drawer.makeGraphs(for: graphArray, graphWidth, graphHeight, lineLayer: lineLayer, on: self)
+
+//        if !needToRedraw {
+//            drawer.makeTestGraph(on: self, lineLayer: lineLayer)
+//        } else {
+//            drawer.redrawTestGraph(on: self, lineLayer: lineLayer)
+//        }
+
     }
 
 }

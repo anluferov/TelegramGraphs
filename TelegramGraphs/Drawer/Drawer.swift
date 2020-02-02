@@ -19,7 +19,33 @@ struct Constant {
 
 class Drawer {
 
-    func makeGraphs(for lines: GraphArray, _ graphWidth: CGFloat, _ graphHeight: CGFloat) {
+    func makeTestGraph(on view: UIView, lineLayer: CAShapeLayer) {
+        let linePath = UIBezierPath()
+        linePath.move(to: CGPoint(x: 100, y: 100))
+        linePath.addLine(to: CGPoint(x: 400, y: 100))
+
+        lineLayer.path = linePath.cgPath
+        lineLayer.fillColor = nil
+        lineLayer.opacity = 1.0
+        lineLayer.strokeColor = UIColor.blue.cgColor
+        view.layer.addSublayer(lineLayer)
+    }
+
+    func redrawTestGraph(on view: UIView, lineLayer: CAShapeLayer) {
+        let linePath = UIBezierPath()
+        linePath.move(to: CGPoint(x: 100, y: 200))
+        linePath.addLine(to: CGPoint(x: 400, y: 200))
+
+        let animation = CABasicAnimation(keyPath: "path")
+        animation.duration = 1.0
+        animation.fromValue = lineLayer.path
+        animation.toValue = linePath.cgPath
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName(rawValue: "easeInEaseOut"))
+
+        lineLayer.add(animation, forKey: "path")
+    }
+
+    func makeGraphs(for lines: GraphArray, _ graphWidth: CGFloat, _ graphHeight: CGFloat, lineLayer: CAShapeLayer, on view: UIView) {
         //x points
         let xPointsCount = lines.timeX.count
 
@@ -29,19 +55,42 @@ class Drawer {
             return CGFloat(column) * spacing + Constant.margin
         }
 
+        let activeGraphs = lines.lines.filter {
+            $0.isHidden == false
+        }
+
         var maxYPoint = 0
-        lines.lines.forEach {
+        activeGraphs.forEach {
             if $0.points.max()! > maxYPoint {
                 maxYPoint = $0.points.max()!
             }
         }
 
-        lines.lines.forEach {
-            makeSingleGraph(for: $0, with: columnXPoint, graphHeight, maxYPoint: maxYPoint)
+        let graphPath = UIBezierPath()
+
+        activeGraphs.forEach {
+            makeSingleGraph(for: $0, with: columnXPoint, graphHeight, maxYPoint: maxYPoint, lineLayer: lineLayer, on: view, graphPath: graphPath)
         }
+
+        if let _ = lineLayer.path {
+            let animation = CABasicAnimation(keyPath: "path")
+            animation.duration = 1.0
+            animation.fromValue = lineLayer.path
+            animation.toValue = graphPath.cgPath
+            lineLayer.add(animation, forKey: "path")
+            lineLayer.path = graphPath.cgPath
+        } else {
+            lineLayer.path = graphPath.cgPath
+            lineLayer.fillColor = nil
+            lineLayer.opacity = 1.0
+            lineLayer.lineWidth = 2
+            lineLayer.strokeColor = UIColor.black.cgColor
+            view.layer.addSublayer(lineLayer)
+        }
+
     }
 
-    private func makeSingleGraph(for line: Graph, with columnXPoint: (Float) -> CGFloat, _ graphHeight: CGFloat, maxYPoint: Int) {
+    private func makeSingleGraph(for line: Graph, with columnXPoint: (Float) -> CGFloat, _ graphHeight: CGFloat, maxYPoint: Int, lineLayer: CAShapeLayer, on view: UIView, graphPath: UIBezierPath) {
         //y points
         let yPoints = line.points
 
@@ -52,7 +101,6 @@ class Drawer {
         }
 
         //drawing of graphs
-        let graphPath = UIBezierPath()
         graphPath.move(to: CGPoint(x: columnXPoint(0), y: columnYPoint(yPoints[0])))
 
         for (index, value) in yPoints.enumerated() {
@@ -60,19 +108,22 @@ class Drawer {
             graphPath.addLine(to: nextPoint)
         }
 
-        graphPath.lineWidth = 2
-
-        let color = line.color!
-        color.setStroke()
-        graphPath.stroke()
+//        graphPath.lineWidth = 2
+//        let color = line.color!
+//        color.setStroke()
+//        graphPath.stroke()
     }
 
     func drawAxesGrid(for lines: GraphArray, _ graphWidth: CGFloat, _ graphHeight: CGFloat) {
         let maxXCoordinate = Constant.margin + graphWidth
         let spacingCount = Constant.countHorizontalLine
 
+        let activeGraphs = lines.lines.filter {
+            $0.isHidden == false
+        }
+
         var maxYPoint = 0
-        lines.lines.forEach {
+        activeGraphs.forEach {
             if $0.points.max()! > maxYPoint {
                 maxYPoint = $0.points.max()!
             }
@@ -99,12 +150,17 @@ class Drawer {
     }
 
     func addYAxisLabel(for lines: GraphArray, _ graphWidth: CGFloat, _ graphHeight: CGFloat, on view: UIView) {
+
         let spacingCount = Constant.countHorizontalLine
         let labelShiftY = CGFloat(5.0)
         let labelShiftX = CGFloat(0.0)
 
+        let activeGraphs = lines.lines.filter {
+            $0.isHidden == false
+        }
+
         var maxYPoint = 0
-        lines.lines.forEach {
+        activeGraphs.forEach {
             if $0.points.max()! > maxYPoint {
                 maxYPoint = $0.points.max()!
             }
