@@ -10,8 +10,14 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var graphView: GraphView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+
+    @IBAction func buttonAction(_ sender: Any) {
+        graphView.setNeedsDisplay()
     }
 
 }

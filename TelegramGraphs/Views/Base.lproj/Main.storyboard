@@ -25,20 +25,33 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PoS-1H-20k">
+                                <rect key="frame" x="184" y="802" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="buttonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="17S-Xy-t4o"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="PoS-1H-20k" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="184" id="0cF-QH-1eJ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="nej-rv-BKT" secondAttribute="bottom" constant="200" id="5zm-C4-Noi"/>
                             <constraint firstItem="oFF-Nk-8k6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Pi0-Wg-vuC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="PoS-1H-20k" secondAttribute="bottom" constant="30" id="RRx-SB-sdm"/>
                             <constraint firstItem="nej-rv-BKT" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="XNo-L9-dvd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="oFF-Nk-8k6" secondAttribute="trailing" constant="20" id="YhC-BW-2T1"/>
                             <constraint firstItem="nej-rv-BKT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="lyq-w1-ga8"/>
                             <constraint firstItem="oFF-Nk-8k6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="og6-e0-Gbk"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PoS-1H-20k" secondAttribute="trailing" constant="184" id="phb-PM-Pqc"/>
                             <constraint firstItem="nej-rv-BKT" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="rez-6c-Kp3"/>
                             <constraint firstItem="nej-rv-BKT" firstAttribute="top" secondItem="oFF-Nk-8k6" secondAttribute="bottom" constant="8" id="upD-DN-T2V"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="graphView" destination="nej-rv-BKT" id="lyq-uQ-ABc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

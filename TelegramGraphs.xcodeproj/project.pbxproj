@@ -16,6 +16,7 @@
 		CE00B89223D61DAF007685B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE00B89023D61DAF007685B0 /* LaunchScreen.storyboard */; };
 		CE00B89B23D61E38007685B0 /* GraphModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B89A23D61E38007685B0 /* GraphModel.swift */; };
 		CE00B89E23D622AC007685B0 /* chart_data.json in Resources */ = {isa = PBXBuildFile; fileRef = CE00B89D23D622AC007685B0 /* chart_data.json */; };
+		CE2C223C23E6DBD600E2ACF7 /* Drawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C223B23E6DBD600E2ACF7 /* Drawer.swift */; };
 		CEBC918F23D8B3C3007ACD9A /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC918E23D8B3C3007ACD9A /* GraphView.swift */; };
 		CEBC919423D8BFFA007ACD9A /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC919323D8BFFA007ACD9A /* Data.swift */; };
 		CEBC919823D98F59007ACD9A /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC919723D98F59007ACD9A /* String+Extension.swift */; };
@@ -33,6 +34,7 @@
 		CE00B89323D61DAF007685B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE00B89A23D61E38007685B0 /* GraphModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphModel.swift; sourceTree = "<group>"; };
 		CE00B89D23D622AC007685B0 /* chart_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = chart_data.json; sourceTree = "<group>"; };
+		CE2C223B23E6DBD600E2ACF7 /* Drawer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drawer.swift; sourceTree = "<group>"; };
 		CEBC918E23D8B3C3007ACD9A /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		CEBC919323D8BFFA007ACD9A /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		CEBC919723D98F59007ACD9A /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 				CEBC919923D98F63007ACD9A /* Extension */,
 				CE00B89923D61E2B007685B0 /* Model */,
 				CEBC919023D8B3EE007ACD9A /* Views */,
+				CE2C223A23E6DBB800E2ACF7 /* Drawer */,
 				CE00B88223D61DAE007685B0 /* AppDelegate.swift */,
 				CE00B88423D61DAE007685B0 /* SceneDelegate.swift */,
 				CE00B88623D61DAE007685B0 /* ViewController.swift */,
@@ -90,6 +93,14 @@
 				CEBC919323D8BFFA007ACD9A /* Data.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		CE2C223A23E6DBB800E2ACF7 /* Drawer */ = {
+			isa = PBXGroup;
+			children = (
+				CE2C223B23E6DBD600E2ACF7 /* Drawer.swift */,
+			);
+			path = Drawer;
 			sourceTree = "<group>";
 		};
 		CEBC919023D8B3EE007ACD9A /* Views */ = {
@@ -185,6 +196,7 @@
 				CE00B88723D61DAE007685B0 /* ViewController.swift in Sources */,
 				CE00B88D23D61DAE007685B0 /* TelegramGraphs.xcdatamodeld in Sources */,
 				CE00B88323D61DAE007685B0 /* AppDelegate.swift in Sources */,
+				CE2C223C23E6DBD600E2ACF7 /* Drawer.swift in Sources */,
 				CE00B88523D61DAE007685B0 /* SceneDelegate.swift in Sources */,
 				CE00B89B23D61E38007685B0 /* GraphModel.swift in Sources */,
 				CEBC918F23D8B3C3007ACD9A /* GraphView.swift in Sources */,
