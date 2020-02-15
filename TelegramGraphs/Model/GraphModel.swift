@@ -14,7 +14,6 @@ import Foundation
 import UIKit
 
 //MARK: - format of data from JSON
-
 typealias GraphJSONModel = [GraphJSONModelElement]
 
 // MARK: - GraphModelElement
@@ -58,7 +57,6 @@ enum Column: Codable {
 }
 
 //MARK: - interanl format of graph data
-
 struct GraphArray {
     var nameX: String?
     var timeX = [String]()

@@ -12,7 +12,6 @@ var graphData = getDataFromJSON(withName: "chart_data").map {
     convertIntoInternalFormat(from: $0)
 }
 
-
 func getDataFromJSON(withName file: String) -> GraphJSONModel {
     var graphJSON = GraphJSONModel()
     if let path = Bundle.main.path(forResource: file, ofType: "json") {

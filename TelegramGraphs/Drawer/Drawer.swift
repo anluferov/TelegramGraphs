@@ -9,16 +9,9 @@
 import Foundation
 import UIKit
 
-struct Constant {
-    static let margin: CGFloat = 10.0
-    static let topBorder: CGFloat = 20
-    static let bottomBorder: CGFloat = 20
-    static let countHorizontalLine = 6
-    static let countXValues = 6
-}
-
 class Drawer {
 
+    //MARK: - functions for tests
     func makeTestGraph(on view: UIView, lineLayer: CAShapeLayer) {
         let linePath = UIBezierPath()
         linePath.move(to: CGPoint(x: 100, y: 100))
@@ -45,75 +38,105 @@ class Drawer {
         lineLayer.add(animation, forKey: "path")
     }
 
-    func makeGraphs(for lines: GraphArray, _ graphWidth: CGFloat, _ graphHeight: CGFloat, lineLayer: CAShapeLayer, on view: UIView) {
-        //x points
+    //MARK: - drawing of graphs based on array of lines
+
+    func drawGraphs(for lines: GraphArray, on view: UIView, _ graphWidth: CGFloat, _ graphHeight: CGFloat) {
+
         let xPointsCount = lines.timeX.count
 
+        //calculation position of x points
         let columnXPoint = {
             (column: Float) -> CGFloat in
             let spacing = graphWidth / CGFloat(xPointsCount - 1)
             return CGFloat(column) * spacing + Constant.margin
         }
 
-        let activeGraphs = lines.lines.filter {
+        //filter hidden graphs for calculation position of y points
+        let allLines = lines.lines
+        let notHiddenGraphs = allLines.filter {
             $0.isHidden == false
+        }
+        let hiddenGraphs = allLines.filter {
+            $0.isHidden == true
         }
 
         var maxYPoint = 0
-        activeGraphs.forEach {
+        notHiddenGraphs.forEach {
             if $0.points.max()! > maxYPoint {
                 maxYPoint = $0.points.max()!
             }
         }
 
-        let graphPath = UIBezierPath()
+        var graphPaths = [UIBezierPath]()
 
-        activeGraphs.forEach {
-            makeSingleGraph(for: $0, with: columnXPoint, graphHeight, maxYPoint: maxYPoint, lineLayer: lineLayer, on: view, graphPath: graphPath)
-        }
+        //make a drawing each graph in massive
+        notHiddenGraphs.forEach {
+            let yPoints = $0.points
 
-        if let _ = lineLayer.path {
-            let animation = CABasicAnimation(keyPath: "path")
-            animation.duration = 1.0
-            animation.fromValue = lineLayer.path
-            animation.toValue = graphPath.cgPath
-            lineLayer.add(animation, forKey: "path")
-            lineLayer.path = graphPath.cgPath
-        } else {
-            lineLayer.path = graphPath.cgPath
-            lineLayer.fillColor = nil
-            lineLayer.opacity = 1.0
-            lineLayer.lineWidth = 2
-            lineLayer.strokeColor = UIColor.black.cgColor
-            view.layer.addSublayer(lineLayer)
+            //calculation position of y points
+            let columnYPoint = {
+                (yPoint: Int) -> CGFloat in
+                let y = CGFloat(yPoint) * (graphHeight / CGFloat(maxYPoint))
+                return graphHeight + Constant.topBorder - y
+            }
+
+            //drawing of graphs in graphPath
+            let graphPath = UIBezierPath()
+            graphPath.move(to: CGPoint(x: columnXPoint(0), y: columnYPoint(yPoints[0])))
+            for (index, value) in yPoints.enumerated() {
+                let nextPoint = CGPoint(x: columnXPoint(Float(index)), y: columnYPoint(value))
+                graphPath.addLine(to: nextPoint)
+            }
+
+            graphPaths.append(graphPath)
+
+            if let subLayers = view.layer.sublayers {
+                if subLayers.count > graphPaths.count {
+                    hiddenGraphs.forEach {
+                        if let subLayer = view.layer.sublayers?[safe: $0.id] as? CAShapeLayer, let _ = subLayer.path {
+                            animateChangingOpacity(on: subLayer)
+                        }
+                    }
+                }
+            }
+
+            if let subLayer = view.layer.sublayers?[safe: $0.id] as? CAShapeLayer, let subLayerPath = subLayer.path {
+                animateChangingPath(from: subLayerPath, to: graphPath.cgPath, on: subLayer)
+            } else {
+                let graphLayer = CAShapeLayer()
+                graphLayer.path = graphPath.cgPath
+                graphLayer.strokeColor = $0.color?.cgColor
+                graphLayer.lineWidth = 2.0
+                graphLayer.fillColor = nil
+                graphLayer.opacity = 1.0
+                view.layer.addSublayer(graphLayer)
+            }
         }
 
     }
 
-    private func makeSingleGraph(for line: Graph, with columnXPoint: (Float) -> CGFloat, _ graphHeight: CGFloat, maxYPoint: Int, lineLayer: CAShapeLayer, on view: UIView, graphPath: UIBezierPath) {
-        //y points
-        let yPoints = line.points
+    //animate changing path (position of graphs)
+    private func animateChangingPath(from oldValue: CGPath, to newValue: CGPath, on layer: CAShapeLayer) {
+        let pathAnimation = CABasicAnimation(keyPath: "path")
+        pathAnimation.fromValue = oldValue
+        pathAnimation.toValue = newValue
+        pathAnimation.duration = 1.0
 
-        let columnYPoint = {
-            (yPoint: Int) -> CGFloat in
-            let y = CGFloat(yPoint) * (graphHeight / CGFloat(maxYPoint))
-            return graphHeight + Constant.topBorder - y
-        }
-
-        //drawing of graphs
-        graphPath.move(to: CGPoint(x: columnXPoint(0), y: columnYPoint(yPoints[0])))
-
-        for (index, value) in yPoints.enumerated() {
-            let nextPoint = CGPoint(x: columnXPoint(Float(index)), y: columnYPoint(value))
-            graphPath.addLine(to: nextPoint)
-        }
-
-//        graphPath.lineWidth = 2
-//        let color = line.color!
-//        color.setStroke()
-//        graphPath.stroke()
+        layer.add(pathAnimation, forKey: "pathAnimation")
+        layer.path = newValue
     }
 
+    private func animateChangingOpacity(on layer: CAShapeLayer) {
+        let opacityAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.opacity))
+        opacityAnimation.fromValue = 1.0
+        opacityAnimation.toValue = 0.0
+        opacityAnimation.duration = 1.0
+
+        layer.add(opacityAnimation, forKey: "opacityAnimation")
+        layer.opacity = 0.0
+    }
+
+    //MARK: - drawing of axes
     func drawAxesGrid(for lines: GraphArray, _ graphWidth: CGFloat, _ graphHeight: CGFloat) {
         let maxXCoordinate = Constant.margin + graphWidth
         let spacingCount = Constant.countHorizontalLine
@@ -224,8 +247,8 @@ class Drawer {
             xLabel.textColor = .lightGray
             view.addSubview(xLabel)
         }
-
     }
+
 }
 
 

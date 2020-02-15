@@ -8,6 +8,14 @@
 
 import UIKit
 
+struct Constant {
+    static let margin: CGFloat = 10.0
+    static let topBorder: CGFloat = 20
+    static let bottomBorder: CGFloat = 20
+    static let countHorizontalLine = 6
+    static let countXValues = 6
+}
+
 class GraphView: UIView {
 
     let drawer = Drawer()
@@ -21,10 +29,10 @@ class GraphView: UIView {
         let graphArray = graphData[0]
 
         drawer.drawAxesGrid(for: graphArray, graphWidth, graphHeight)
-        drawer.addYAxisLabel(for: graphArray, graphWidth, graphHeight, on: self)
-        drawer.addXAxisLabel(for: graphArray, graphWidth, graphHeight, on: self)
+//        drawer.addYAxisLabel(for: graphArray, graphWidth, graphHeight, on: self)
+//        drawer.addXAxisLabel(for: graphArray, graphWidth, graphHeight, on: self)
 
-        drawer.makeGraphs(for: graphArray, graphWidth, graphHeight, lineLayer: lineLayer, on: self)
+        drawer.drawGraphs(for: graphArray, on: self, graphWidth, graphHeight)
 
 //        if !needToRedraw {
 //            drawer.makeTestGraph(on: self, lineLayer: lineLayer)
