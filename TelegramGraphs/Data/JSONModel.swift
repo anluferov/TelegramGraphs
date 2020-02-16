@@ -11,9 +11,8 @@
 //   let graphModel = try? newJSONDecoder().decode(GraphModel.self, from: jsonData)
 
 import Foundation
-import UIKit
 
-//MARK: - format of data from JSON
+//MARK: - Format of data from JSON
 typealias GraphJSONModel = [GraphJSONModelElement]
 
 // MARK: - GraphModelElement
@@ -56,20 +55,4 @@ enum Column: Codable {
     }
 }
 
-//MARK: - interanl format of graph data
-struct GraphArray {
-    var nameX: String?
-    var timeX = [String]()
-    var colorX: UIColor?
-    var lines = [Graph]()
-}
 
-struct Graph {
-    var id: Int = 0
-    var name: String?
-    var type: String?
-    var color: UIColor?
-    var isHidden: Bool = false
-    var points = [Int]()
-    var countY = 0
-}

@@ -18,10 +18,10 @@ class ViewController: UIViewController {
 
     @IBAction func buttonAction(_ sender: Any) {
 
-        if graphData[0].lines[0].isHidden  {
-            graphData[0].lines[0].isHidden = false
+        if graphsArray[0].lines[0].isHidden  {
+            graphsArray[0].lines[0].isHidden = false
         }  else {
-            graphData[0].lines[0].isHidden = true
+            graphsArray[0].lines[0].isHidden = true
         }
 
         graphView.needToRedraw = true

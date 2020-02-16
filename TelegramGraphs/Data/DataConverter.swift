@@ -8,10 +8,12 @@
 
 import Foundation
 
-var graphData = getDataFromJSON(withName: "chart_data").map {
+//MARK: - data with graph info from json in internal format
+var graphsArray = getDataFromJSON(withName: "chart_data").map {
     convertIntoInternalFormat(from: $0)
 }
 
+// Fetching data from JSON
 func getDataFromJSON(withName file: String) -> GraphJSONModel {
     var graphJSON = GraphJSONModel()
     if let path = Bundle.main.path(forResource: file, ofType: "json") {
@@ -25,16 +27,17 @@ func getDataFromJSON(withName file: String) -> GraphJSONModel {
     return graphJSON
 }
 
-func convertIntoInternalFormat(from data: GraphJSONModelElement) -> GraphArray {
+// Converting data into internal format
+func convertIntoInternalFormat(from data: GraphJSONModelElement) -> Graph {
 
     let dateFormatter = DateFormatter()
     dateFormatter.locale = Locale(identifier: "en-US")
     dateFormatter.setLocalizedDateFormatFromTemplate("MMM dd")
 
-    var graphArray = GraphArray()
+    var graphArray = Graph()
     var nameLine = ""
     var values = [Int]()
-    var lines = [Graph]()
+    var lines = [Line]()
 
     for line in data.columns {
         for element in line {
@@ -52,7 +55,7 @@ func convertIntoInternalFormat(from data: GraphJSONModelElement) -> GraphArray {
                     dateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval($0/1000)))
                 }
             case "y0":
-                lines.append(Graph(id: lines.count,
+                lines.append(Line(layerIndex: lines.count, 
                                    name: data.names.y0,
                                    type: data.types.y0,
                                    color: data.colors.y0.hexStringToUIColor(),
@@ -60,7 +63,7 @@ func convertIntoInternalFormat(from data: GraphJSONModelElement) -> GraphArray {
                                    points: values,
                                    countY: values.count))
             case "y1":
-                lines.append(Graph(id: lines.count,
+                lines.append(Line(layerIndex: lines.count,
                                    name: data.names.y1,
                                    type: data.types.y1,
                                    color: data.colors.y1.hexStringToUIColor(),
@@ -68,7 +71,7 @@ func convertIntoInternalFormat(from data: GraphJSONModelElement) -> GraphArray {
                                    points: values,
                                    countY: values.count))
             case "y2":
-                lines.append(Graph(id: lines.count,
+                lines.append(Line(layerIndex: lines.count,
                                    name: data.names.y2!,
                                    type: data.types.y2!,
                                    color: data.colors.y2 != nil ? data.colors.y2!.hexStringToUIColor() : nil,
@@ -76,7 +79,7 @@ func convertIntoInternalFormat(from data: GraphJSONModelElement) -> GraphArray {
                                    points: values,
                                    countY: values.count))
             case "y3":
-                lines.append(Graph(id: lines.count,
+                lines.append(Line(layerIndex: lines.count,
                                    name: data.names.y3!,
                                    type: data.types.y3!,
                                    color: data.colors.y3 != nil ? data.colors.y3!.hexStringToUIColor() : nil,

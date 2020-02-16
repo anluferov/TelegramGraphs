@@ -14,12 +14,14 @@
 		CE00B88D23D61DAE007685B0 /* TelegramGraphs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE00B88B23D61DAE007685B0 /* TelegramGraphs.xcdatamodeld */; };
 		CE00B88F23D61DAF007685B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE00B88E23D61DAF007685B0 /* Assets.xcassets */; };
 		CE00B89223D61DAF007685B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE00B89023D61DAF007685B0 /* LaunchScreen.storyboard */; };
-		CE00B89B23D61E38007685B0 /* GraphModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B89A23D61E38007685B0 /* GraphModel.swift */; };
+		CE00B89B23D61E38007685B0 /* JSONModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B89A23D61E38007685B0 /* JSONModel.swift */; };
 		CE00B89E23D622AC007685B0 /* chart_data.json in Resources */ = {isa = PBXBuildFile; fileRef = CE00B89D23D622AC007685B0 /* chart_data.json */; };
 		CE2C223C23E6DBD600E2ACF7 /* Drawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C223B23E6DBD600E2ACF7 /* Drawer.swift */; };
+		CE4FFDD623F92A9800DE68D0 /* InternalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4FFDD523F92A9800DE68D0 /* InternalModel.swift */; };
+		CE4FFDD823F92CF300DE68D0 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4FFDD723F92CF300DE68D0 /* Animator.swift */; };
 		CEB9C8CD23F7F60F008A422E /* Collections+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB9C8CC23F7F60F008A422E /* Collections+Extension.swift */; };
 		CEBC918F23D8B3C3007ACD9A /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC918E23D8B3C3007ACD9A /* GraphView.swift */; };
-		CEBC919423D8BFFA007ACD9A /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC919323D8BFFA007ACD9A /* Data.swift */; };
+		CEBC919423D8BFFA007ACD9A /* DataConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC919323D8BFFA007ACD9A /* DataConverter.swift */; };
 		CEBC919823D98F59007ACD9A /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC919723D98F59007ACD9A /* String+Extension.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,12 +35,14 @@
 		CE00B88E23D61DAF007685B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE00B89123D61DAF007685B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE00B89323D61DAF007685B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CE00B89A23D61E38007685B0 /* GraphModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphModel.swift; sourceTree = "<group>"; };
+		CE00B89A23D61E38007685B0 /* JSONModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONModel.swift; sourceTree = "<group>"; };
 		CE00B89D23D622AC007685B0 /* chart_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = chart_data.json; sourceTree = "<group>"; };
 		CE2C223B23E6DBD600E2ACF7 /* Drawer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drawer.swift; sourceTree = "<group>"; };
+		CE4FFDD523F92A9800DE68D0 /* InternalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalModel.swift; sourceTree = "<group>"; };
+		CE4FFDD723F92CF300DE68D0 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		CEB9C8CC23F7F60F008A422E /* Collections+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collections+Extension.swift"; sourceTree = "<group>"; };
 		CEBC918E23D8B3C3007ACD9A /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
-		CEBC919323D8BFFA007ACD9A /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		CEBC919323D8BFFA007ACD9A /* DataConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataConverter.swift; sourceTree = "<group>"; };
 		CEBC919723D98F59007ACD9A /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,14 +76,13 @@
 		CE00B88123D61DAE007685B0 /* TelegramGraphs */ = {
 			isa = PBXGroup;
 			children = (
-				CEBC919923D98F63007ACD9A /* Extension */,
-				CE00B89923D61E2B007685B0 /* Model */,
+				CEBC919923D98F63007ACD9A /* Extensions */,
+				CE00B89923D61E2B007685B0 /* Data */,
 				CEBC919023D8B3EE007ACD9A /* Views */,
 				CE2C223A23E6DBB800E2ACF7 /* Drawer */,
 				CE00B88223D61DAE007685B0 /* AppDelegate.swift */,
 				CE00B88423D61DAE007685B0 /* SceneDelegate.swift */,
 				CE00B88623D61DAE007685B0 /* ViewController.swift */,
-				CE00B89D23D622AC007685B0 /* chart_data.json */,
 				CE00B88E23D61DAF007685B0 /* Assets.xcassets */,
 				CE00B89023D61DAF007685B0 /* LaunchScreen.storyboard */,
 				CE00B89323D61DAF007685B0 /* Info.plist */,
@@ -88,19 +91,22 @@
 			path = TelegramGraphs;
 			sourceTree = "<group>";
 		};
-		CE00B89923D61E2B007685B0 /* Model */ = {
+		CE00B89923D61E2B007685B0 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				CE00B89A23D61E38007685B0 /* GraphModel.swift */,
-				CEBC919323D8BFFA007ACD9A /* Data.swift */,
+				CE00B89A23D61E38007685B0 /* JSONModel.swift */,
+				CE4FFDD523F92A9800DE68D0 /* InternalModel.swift */,
+				CEBC919323D8BFFA007ACD9A /* DataConverter.swift */,
+				CE00B89D23D622AC007685B0 /* chart_data.json */,
 			);
-			path = Model;
+			path = Data;
 			sourceTree = "<group>";
 		};
 		CE2C223A23E6DBB800E2ACF7 /* Drawer */ = {
 			isa = PBXGroup;
 			children = (
 				CE2C223B23E6DBD600E2ACF7 /* Drawer.swift */,
+				CE4FFDD723F92CF300DE68D0 /* Animator.swift */,
 			);
 			path = Drawer;
 			sourceTree = "<group>";
@@ -114,13 +120,13 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		CEBC919923D98F63007ACD9A /* Extension */ = {
+		CEBC919923D98F63007ACD9A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				CEBC919723D98F59007ACD9A /* String+Extension.swift */,
 				CEB9C8CC23F7F60F008A422E /* Collections+Extension.swift */,
 			);
-			path = Extension;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,16 +201,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEBC919423D8BFFA007ACD9A /* Data.swift in Sources */,
+				CE4FFDD823F92CF300DE68D0 /* Animator.swift in Sources */,
+				CEBC919423D8BFFA007ACD9A /* DataConverter.swift in Sources */,
 				CE00B88723D61DAE007685B0 /* ViewController.swift in Sources */,
 				CE00B88D23D61DAE007685B0 /* TelegramGraphs.xcdatamodeld in Sources */,
 				CE00B88323D61DAE007685B0 /* AppDelegate.swift in Sources */,
 				CE2C223C23E6DBD600E2ACF7 /* Drawer.swift in Sources */,
 				CE00B88523D61DAE007685B0 /* SceneDelegate.swift in Sources */,
-				CE00B89B23D61E38007685B0 /* GraphModel.swift in Sources */,
+				CE00B89B23D61E38007685B0 /* JSONModel.swift in Sources */,
 				CEBC918F23D8B3C3007ACD9A /* GraphView.swift in Sources */,
 				CEBC919823D98F59007ACD9A /* String+Extension.swift in Sources */,
 				CEB9C8CD23F7F60F008A422E /* Collections+Extension.swift in Sources */,
+				CE4FFDD623F92A9800DE68D0 /* InternalModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
