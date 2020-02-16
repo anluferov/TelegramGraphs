@@ -139,8 +139,8 @@ class Drawer {
 
                 //if this line was hidden, change opacity
                 if subLayer.opacity == 0.0 {
-                    animator.animateAppear(on: subLayer)
                     subLayer.opacity = 1.0
+                    animator.animateAppear(on: subLayer)
                 }
             }
         }
@@ -148,8 +148,8 @@ class Drawer {
         //hide all firstly hidden lines
         hiddenLines.forEach {
             if let subLayer = imagesLayers[safe: $0.layerIndex] {
-                animator.animateDisappear(on: subLayer)
                 subLayer.opacity = 0.0
+                animator.animateDisappear(on: subLayer)
             }
 
         }

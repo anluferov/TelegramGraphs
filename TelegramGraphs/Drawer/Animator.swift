@@ -18,28 +18,28 @@ class Animator {
         pathAnimation.toValue = newValue
         pathAnimation.duration = 0.5
 
-        layer.add(pathAnimation, forKey: "pathAnimation")
-//        layer.path = newValue
+        layer.add(pathAnimation, forKey: nil)
     }
 
     func animateDisappear(on layer: CAShapeLayer) {
-        let opacityAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.opacity))
+
+        //TO-DO: need to add to animation scale as in example
+        
+        let opacityAnimation = CABasicAnimation(keyPath: "opacity")
         opacityAnimation.fromValue = 1.0
         opacityAnimation.toValue = 0.0
         opacityAnimation.duration = 0.5
 
-        layer.add(opacityAnimation, forKey: "opacityAnimation")
-//        layer.opacity = 0.0
+        layer.add(opacityAnimation, forKey: nil)
     }
 
     func animateAppear(on layer: CAShapeLayer) {
-        let opacityAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.opacity))
+        let opacityAnimation = CABasicAnimation(keyPath: "opacity")
         opacityAnimation.fromValue = 0.0
         opacityAnimation.toValue = 1.0
         opacityAnimation.duration = 0.5
 
-        layer.add(opacityAnimation, forKey: "opacityAnimation")
-//        layer.opacity = 1.0
+        layer.add(opacityAnimation, forKey: nil)
     }
 
     func startGroupAnimation(_ group:CAAnimationGroup, on layer: CALayer) {
