@@ -36,7 +36,7 @@ class GraphView: UIView {
         if !needToRedraw {
             drawer.initGraph(for: graph, graphWidth, graphHeight, on: self)
         } else {
-            drawer.redrawGraphs(for: graph, graphWidth, graphHeight, on: self)
+            drawer.redrawGraph(for: graph, graphWidth, graphHeight, on: self)
         }
 
     }

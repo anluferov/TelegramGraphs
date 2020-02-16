@@ -11,6 +11,8 @@ import UIKit
 
 class Drawer {
 
+    let animator = Animator()
+
     //array of CAShapeLayers. Each CAShapeLayer will contain a line or axes
     var imagesLayers = [CAShapeLayer]()
 
@@ -96,7 +98,7 @@ class Drawer {
         }
     }
 
-    func redrawGraphs(for graph: Graph, _ graphWidth: CGFloat, _ graphHeight: CGFloat, on view: UIView) {
+    func redrawGraph(for graph: Graph, _ graphWidth: CGFloat, _ graphHeight: CGFloat, on view: UIView) {
 
         //filter hidden and not hidden graphs for drawing
         let notHiddenLines = getLines(from: graph, type: .notHidden)
@@ -131,24 +133,25 @@ class Drawer {
                 graphPath.addLine(to: nextPoint)
             }
 
-            if let layerIndex = view.layer.sublayers?.lastIndex(of: imagesLayers[$0.layerIndex]), //get index of layer for this line
-                let subLayer = view.layer.sublayers?[safe: layerIndex] as? CAShapeLayer, //get layer for this line
-                let subLayerPath = subLayer.path { //get old path from this layer
-                    animateChangingPath(from: subLayerPath, to: graphPath.cgPath, on: subLayer)
+            if let subLayer = imagesLayers[safe: $0.layerIndex], let subLayerPath = subLayer.path {
+                animator.animateChangingPath(from: subLayerPath, to: graphPath.cgPath, on: subLayer)
+                subLayer.path = graphPath.cgPath
 
                 //if this line was hidden, change opacity
-                 if subLayer.opacity == 0.0 {
-                     animateAppear(on: subLayer)
-                 }
-             }
+                if subLayer.opacity == 0.0 {
+                    animator.animateAppear(on: subLayer)
+                    subLayer.opacity = 1.0
+                }
+            }
         }
 
         //hide all firstly hidden lines
         hiddenLines.forEach {
-            if let layerIndex = view.layer.sublayers?.lastIndex(of: imagesLayers[$0.layerIndex]), //get index of layer for this line
-                let subLayer = view.layer.sublayers?[safe: layerIndex] as? CAShapeLayer { //get layer for this line
-                animateDisappear(on: subLayer)
+            if let subLayer = imagesLayers[safe: $0.layerIndex] {
+                animator.animateDisappear(on: subLayer)
+                subLayer.opacity = 0.0
             }
+
         }
     }
 
@@ -184,11 +187,16 @@ class Drawer {
         horizontalAxesLayer.lineWidth = 1.5
         horizontalAxesLayer.fillColor = nil
         horizontalAxesLayer.opacity = 0.8
-        horizontalAxesLayer.path = horizontalLines.cgPath
+        if let oldPath = horizontalAxesLayer.path {
+            animator.animateChangingPath(from: oldPath, to: horizontalLines.cgPath, on: horizontalAxesLayer)
+            horizontalAxesLayer.path = horizontalLines.cgPath
+        } else {
+            horizontalAxesLayer.path = horizontalLines.cgPath
 
-        //add layer with grid to array of layers and on view
-        imagesLayers.append(horizontalAxesLayer)
-        view.layer.addSublayer(horizontalAxesLayer)
+            //add layer with grid to array of layers and on view
+            imagesLayers.append(horizontalAxesLayer)
+            view.layer.addSublayer(horizontalAxesLayer)
+        }
     }
 
     func addYAxisLabel(for lines: Graph, _ graphWidth: CGFloat, _ graphHeight: CGFloat, on view: UIView) {
@@ -266,38 +274,6 @@ class Drawer {
             xLabel.textColor = .lightGray
             view.addSubview(xLabel)
         }
-    }
-
-
-    //MARK: - Animate changing path (position of graphs)
-    private func animateChangingPath(from oldValue: CGPath, to newValue: CGPath, on layer: CAShapeLayer) {
-        let pathAnimation = CABasicAnimation(keyPath: "path")
-        pathAnimation.fromValue = oldValue
-        pathAnimation.toValue = newValue
-        pathAnimation.duration = 0.5
-
-        layer.add(pathAnimation, forKey: "pathAnimation")
-        layer.path = newValue
-    }
-
-    private func animateDisappear(on layer: CAShapeLayer) {
-        let opacityAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.opacity))
-        opacityAnimation.fromValue = 1.0
-        opacityAnimation.toValue = 0.0
-        opacityAnimation.duration = 0.5
-
-        layer.add(opacityAnimation, forKey: "opacityAnimation")
-        layer.opacity = 0.0
-    }
-
-    private func animateAppear(on layer: CAShapeLayer) {
-        let opacityAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.opacity))
-        opacityAnimation.fromValue = 0.0
-        opacityAnimation.toValue = 1.0
-        opacityAnimation.duration = 0.5
-
-        layer.add(opacityAnimation, forKey: "opacityAnimation")
-        layer.opacity = 1.0
     }
 
     //MARK: - functions for tests
