@@ -29,11 +29,10 @@ class GraphView: UIView {
         let graph = graphsArray[0]
 
         drawer.drawHorizontalAxes(for: graph, graphWidth, graphHeight, on: self)
-//        drawer.addYAxisLabel(for: graphArray, graphWidth, graphHeight, on: self)
-//        drawer.addXAxisLabel(for: graphArray, graphWidth, graphHeight, on: self)
-
+        drawer.addYAxisLabel(for: graph, graphWidth, graphHeight, on: self)
 
         if !needToRedraw {
+            drawer.addXAxisLabel(for: graph, graphWidth, graphHeight, on: self)
             drawer.initGraph(for: graph, graphWidth, graphHeight, on: self)
         } else {
             drawer.redrawGraph(for: graph, graphWidth, graphHeight, on: self)
