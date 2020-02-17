@@ -12,40 +12,37 @@ import UIKit
 class Animator {
 
     //animate changing path (position of graphs)
-    func animateChangingPath(from oldValue: CGPath, to newValue: CGPath, on layer: CAShapeLayer) {
+    func animateChangingPath(from oldValue: CGPath, to newValue: CGPath, on layer: CAShapeLayer, duration: Double) {
         let pathAnimation = CABasicAnimation(keyPath: "path")
         pathAnimation.fromValue = oldValue
         pathAnimation.toValue = newValue
-        pathAnimation.duration = 0.5
+        pathAnimation.duration = duration
 
         layer.add(pathAnimation, forKey: nil)
     }
 
-    func animateDisappear(on layer: CAShapeLayer) {
+    func animateDisappear(on layer: CAShapeLayer, duration: Double) {
 
         //TO-DO: need to add to animation scale as in example
         
         let opacityAnimation = CABasicAnimation(keyPath: "opacity")
         opacityAnimation.fromValue = 1.0
         opacityAnimation.toValue = 0.0
-        opacityAnimation.duration = 0.5
+        opacityAnimation.duration = duration
 
         layer.add(opacityAnimation, forKey: nil)
     }
 
-    func animateAppear(on layer: CAShapeLayer) {
+    func animateAppear(on layer: CAShapeLayer, duration: Double) {
         let opacityAnimation = CABasicAnimation(keyPath: "opacity")
         opacityAnimation.fromValue = 0.0
         opacityAnimation.toValue = 1.0
-        opacityAnimation.duration = 0.5
+        opacityAnimation.duration = duration
 
         layer.add(opacityAnimation, forKey: nil)
     }
 
-    func startGroupAnimation(_ group:CAAnimationGroup, on layer: CALayer) {
-        group.duration = 1.5
-        layer.add(group, forKey: nil)
-    }
+
 }
 
 

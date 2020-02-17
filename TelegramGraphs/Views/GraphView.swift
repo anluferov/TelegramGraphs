@@ -19,7 +19,6 @@ struct Constant {
 class GraphView: UIView {
 
     let drawer = Drawer()
-    let lineLayer = CAShapeLayer()
     var needToRedraw = false
 
     override func draw(_ rect: CGRect) {
@@ -28,7 +27,7 @@ class GraphView: UIView {
         let graphHeight = rect.height - Constant.topBorder - Constant.bottomBorder
         let graph = graphsArray[0]
 
-        drawer.drawHorizontalAxes(for: graph, graphWidth, graphHeight, on: self)
+        drawer.drawHorizontalAxis(for: graph, graphWidth, graphHeight, on: self)
         drawer.addYAxisLabel(for: graph, graphWidth, graphHeight, on: self)
 
         if !needToRedraw {

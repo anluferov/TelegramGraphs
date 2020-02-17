@@ -13,11 +13,11 @@ class Drawer {
 
     let animator = Animator()
 
-    //array of CAShapeLayers. Each CAShapeLayer will contain a line or axes
-    var imagesLayers = [CAShapeLayer]()
-
-    //CAShapeLayer for horizontal lines
-    let horizontalAxesLayer = CAShapeLayer()
+    //array of CAShapeLayers. Each CAShapeLayer will contain a graph lines or axis lines
+    var linesLayers = [CAShapeLayer]()
+    var labelsXLayers = [CATextLayer]()
+    var labelsYLayers = [CATextLayer]()
+    let horizontalAxisLayer = CAShapeLayer()
 
     enum linesType {
         case all
@@ -92,7 +92,7 @@ class Drawer {
             graphLayer.opacity = 1.0
 
             //insert layer with a line to array with all lines on layerId position
-            imagesLayers.insert(graphLayer, at: $0.layerIndex)
+            linesLayers.insert(graphLayer, at: $0.layerIndex)
             //add layer with line on view
             view.layer.addSublayer(graphLayer)
         }
@@ -133,30 +133,30 @@ class Drawer {
                 graphPath.addLine(to: nextPoint)
             }
 
-            if let subLayer = imagesLayers[safe: $0.layerIndex], let subLayerPath = subLayer.path {
-                animator.animateChangingPath(from: subLayerPath, to: graphPath.cgPath, on: subLayer)
+            if let subLayer = linesLayers[safe: $0.layerIndex], let subLayerPath = subLayer.path {
+                animator.animateChangingPath(from: subLayerPath, to: graphPath.cgPath, on: subLayer, duration: 0.25)
                 subLayer.path = graphPath.cgPath
 
                 //if this line was hidden, change opacity
                 if subLayer.opacity == 0.0 {
                     subLayer.opacity = 1.0
-                    animator.animateAppear(on: subLayer)
+                    animator.animateAppear(on: subLayer, duration: 0.5)
                 }
             }
         }
 
         //hide all firstly hidden lines
         hiddenLines.forEach {
-            if let subLayer = imagesLayers[safe: $0.layerIndex] {
+            if let subLayer = linesLayers[safe: $0.layerIndex] {
                 subLayer.opacity = 0.0
-                animator.animateDisappear(on: subLayer)
+                animator.animateDisappear(on: subLayer, duration: 0.5)
             }
 
         }
     }
 
-    //MARK: - drawing of horizontal axes
-    func drawHorizontalAxes(for graph: Graph, _ graphWidth: CGFloat, _ graphHeight: CGFloat, on view: UIView) {
+    //MARK: - drawing of coordinate axes
+    func drawHorizontalAxis(for graph: Graph, _ graphWidth: CGFloat, _ graphHeight: CGFloat, on view: UIView) {
 
         //filter hidden and not hidden graphs for drawing
         let notHiddenLines = getLines(from: graph, type: .notHidden)
@@ -164,7 +164,7 @@ class Drawer {
         //calculate max Y point for all not hidden lines in graph
         let maxYPoint = getMaxYPoint(for: notHiddenLines)
 
-        //create array of Y position for dX axes
+        //create array of Y position for dX axis
         var yPositionArray = [CGFloat]()
         let ySpacing = CGFloat(maxYPoint / Constant.countHorizontalLine) * (graphHeight / CGFloat(maxYPoint))
         var yPosition = Constant.topBorder + graphHeight
@@ -183,83 +183,107 @@ class Drawer {
         }
 
         //set layer for horizontal lines grid
-        horizontalAxesLayer.strokeColor = UIColor.lightGray.cgColor
-        horizontalAxesLayer.lineWidth = 0.5
-        horizontalAxesLayer.fillColor = nil
-        horizontalAxesLayer.opacity = 0.6
-        if let oldPath = horizontalAxesLayer.path {
-            animator.animateChangingPath(from: oldPath, to: horizontalLines.cgPath, on: horizontalAxesLayer)
-            horizontalAxesLayer.path = horizontalLines.cgPath
+        horizontalAxisLayer.strokeColor = UIColor.lightGray.cgColor
+        horizontalAxisLayer.lineWidth = 0.5
+        horizontalAxisLayer.fillColor = nil
+        horizontalAxisLayer.opacity = 0.6
+        if let oldPath = horizontalAxisLayer.path {
+            animator.animateChangingPath(from: oldPath, to: horizontalLines.cgPath, on: horizontalAxisLayer, duration: 0.5)
+            horizontalAxisLayer.path = horizontalLines.cgPath
         } else {
-            horizontalAxesLayer.path = horizontalLines.cgPath
+            horizontalAxisLayer.path = horizontalLines.cgPath
 
-            //add layer with grid to array of layers and on view
-            imagesLayers.append(horizontalAxesLayer)
-            view.layer.addSublayer(horizontalAxesLayer)
+            //add layer with grid on view
+            view.layer.addSublayer(horizontalAxisLayer)
         }
     }
 
     func addYAxisLabel(for graph: Graph, _ graphWidth: CGFloat, _ graphHeight: CGFloat, on view: UIView) {
 
-        let spacingCount = Constant.countHorizontalLine
+        //size and indents for labels on dY
+        let labelWidth = CGFloat(100)
+        let labelHeight = CGFloat(15)
         let labelShiftY = CGFloat(5.0)
         let labelShiftX = CGFloat(0.0)
 
-        let activeGraphs = graph.lines.filter {
-            $0.isHidden == false
-        }
+        //filter hidden and not hidden graphs for drawing
+        let notHiddenLines = getLines(from: graph, type: .notHidden)
 
-        var maxYPoint = 0
-        activeGraphs.forEach {
-            if $0.points.max()! > maxYPoint {
-                maxYPoint = $0.points.max()!
-            }
-        }
+        //calculate max Y point for all not hidden lines in graph
+        let maxYPoint = getMaxYPoint(for: notHiddenLines)
 
-        let spacingInPoint = maxYPoint / spacingCount
-        let spacing = CGFloat(spacingInPoint) * (graphHeight / CGFloat(maxYPoint))
+        //calculate spacing
+        let spacingCount = Constant.countHorizontalLine
+        let spacing = CGFloat(maxYPoint / Constant.countHorizontalLine) * (graphHeight / CGFloat(maxYPoint))
+        let spacingForValues = maxYPoint / spacingCount
 
-        var labelInfoArray = [(yCoord: CGFloat, value: Int)]()
-        var yLabelText = 0
-        var yLabelPosition = Constant.topBorder + graphHeight - labelShiftY
+        //calculate coordinate of labels for dY and their values
+        var labelInfoArray = [(xCoord: CGFloat, yCoord: CGFloat, value: Int)]()
+        let labelXPosition = Constant.margin + labelShiftX
+        var labelYPosition = Constant.topBorder + graphHeight - labelShiftY
+        var labelText = 0
         for _ in 0..<spacingCount {
-            labelInfoArray.append((yLabelPosition,yLabelText))
-            yLabelPosition -= spacing
-            yLabelText += spacingInPoint
+            labelInfoArray.append((labelXPosition,labelYPosition,labelText))
+            labelYPosition -= spacing
+            labelText += spacingForValues
         }
 
-        let xLabelPosition = Constant.margin + labelShiftX
+        // implementation with UILabel //
 
-        labelInfoArray.forEach {
-            let yLabelWidth = CGFloat(100)
-            let yLabelHeight = CGFloat(20)
-            yLabelPosition = $0.yCoord - yLabelHeight
-            let yLabel = UILabel(frame: CGRect(x: xLabelPosition, y: yLabelPosition, width: yLabelWidth, height: yLabelHeight))
-            yLabel.text = String($0.value)
-            yLabel.textColor = .lightGray
-            view.addSubview(yLabel)
+//        labelInfoArray.forEach {
+//            let yCoord = $0.yCoord - labelHeight
+//            let yLabel = UILabel(frame: CGRect(x: $0.xCoord, y: yCoord, width: labelWidth, height: labelHeight))
+//            yLabel.text = String($0.value)
+//            yLabel.textColor = .lightGray
+//            view.addSubview(yLabel)
+//        }
+
+        // implementation with CATextLayer //
+
+        if labelsYLayers.isEmpty {
+            //create array labelsYLayers with all labels on dY and add labels on view
+            labelInfoArray.forEach {
+                let labelLayer = CATextLayer()
+                labelLayer.string = String($0.value)
+                labelLayer.fontSize = 15
+                labelLayer.foregroundColor = UIColor.lightGray.cgColor
+                labelLayer.contentsScale = UIScreen.main.scale
+
+                let yCoord = $0.yCoord - labelHeight
+                labelLayer.frame = CGRect(x: $0.xCoord, y: yCoord, width: labelWidth, height: labelHeight)
+
+                labelsYLayers.append(labelLayer)
+                view.layer.addSublayer(labelLayer)
+            }
+        } else {
+            zip(labelInfoArray,labelsYLayers).forEach {
+                let yCoord = $0.yCoord - labelHeight
+                CATransaction.begin()
+                $1.string = String($0.value)
+                $1.frame = CGRect(x: $0.xCoord, y: yCoord, width: labelWidth, height: labelHeight)
+                CATransaction.commit()
+            }
         }
     }
 
     func addXAxisLabel(for graph: Graph, _ graphWidth: CGFloat, _ graphHeight: CGFloat, on view: UIView) {
 
         //size and indents for labels on dX
-        let labelShiftY = CGFloat(5.0)
-        let labelShiftX = CGFloat(5.0)
+        let labelShiftY = CGFloat(5.0) //interval between bottom of graph and labels for dX axis
+        let labelShiftX = CGFloat(5.0) //interval between border of graph and first label for dX axis
         let labelWidth = CGFloat(100)
-        let labelHeight = CGFloat(30)
+        let labelHeight = CGFloat(15)
 
-        //calculate spacing for graph and index of timeX array
+        //calculate spacing between labels on dX and index of timeX array
         let countXValues = graph.timeX.count
         let spacing = graphWidth / CGFloat(Constant.countXValues)
         let spacingForIndex = countXValues / Constant.countXValues
 
-        //calculate coordinate of labels for dX
+        //calculate coordinate of labels for dX and their values
         let labelYPosition = Constant.topBorder + graphHeight + labelShiftY
         var labelXPosition = Constant.margin + labelShiftX
         var labelInfoArray = [(xCoord: CGFloat, yCoord: CGFloat, value: String)]()
         var index = 0
-
         for _ in 0..<Constant.countXValues {
             let labelText = graph.timeX[index]
             labelInfoArray.append((labelXPosition,labelYPosition,labelText))
@@ -267,27 +291,29 @@ class Drawer {
             index += spacingForIndex
         }
 
-        // old implementation //
+        // implementation with UILabel //
 
 //        labelInfoArray.forEach {
-//            xLabelPosition = $0.xCoord - xLabelHeight
-//            let xLabel = UILabel(frame: CGRect(x: $0.xCoord, y: $0.yCoord, width: xLabelWidth, height: xLabelHeight))
+//            let xLabel = UILabel(frame: CGRect(x: $0.xCoord, y: $0.yCoord, width: labelWidth, height: labelHeight))
 //            xLabel.text = $0.value
 //            xLabel.textColor = .lightGray
 //            view.addSubview(xLabel)
 //        }
 
-        // ------------------ //
+        // implementation with CATextLayer //
 
         labelInfoArray.forEach {
-            let textLayer = CATextLayer()
-            textLayer.string = $0.value
-            textLayer.fontSize = 15
-            textLayer.foregroundColor = UIColor.lightGray.cgColor
-            textLayer.frame = CGRect(x: $0.xCoord, y: $0.yCoord, width: labelWidth, height: labelHeight)
-            view.layer.addSublayer(textLayer)
-        }
+            let labelLayer = CATextLayer()
+            labelLayer.string = $0.value
+            labelLayer.fontSize = 15
+            labelLayer.foregroundColor = UIColor.lightGray.cgColor
+            labelLayer.contentsScale = UIScreen.main.scale
 
+            labelLayer.frame = CGRect(x: $0.xCoord, y: $0.yCoord, width: labelWidth, height: labelHeight)
+
+            labelsXLayers.append(labelLayer)
+            view.layer.addSublayer(labelLayer)
+        }
     }
 
     //MARK: - functions for tests
