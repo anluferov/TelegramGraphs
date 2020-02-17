@@ -25,7 +25,7 @@ class GraphView: UIView {
 
         let graphWidth = rect.width - 2 * Constant.margin
         let graphHeight = rect.height - Constant.topBorder - Constant.bottomBorder
-        let graph = graphsArray[0]
+        let graph = graphs[0]
 
         drawer.drawHorizontalAxis(for: graph, graphWidth, graphHeight, on: self)
         drawer.addYAxisLabel(for: graph, graphWidth, graphHeight, on: self)

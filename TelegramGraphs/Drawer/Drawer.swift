@@ -272,7 +272,7 @@ class Drawer {
         let labelShiftY = CGFloat(5.0) //interval between bottom of graph and labels for dX axis
         let labelShiftX = CGFloat(5.0) //interval between border of graph and first label for dX axis
         let labelWidth = CGFloat(100)
-        let labelHeight = CGFloat(15)
+        let labelHeight = CGFloat(20)
 
         //calculate spacing between labels on dX and index of timeX array
         let countXValues = graph.timeX.count

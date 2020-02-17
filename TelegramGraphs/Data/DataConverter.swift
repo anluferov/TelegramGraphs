@@ -9,7 +9,7 @@
 import Foundation
 
 //MARK: - data with graph info from json in internal format
-var graphsArray = getDataFromJSON(withName: "chart_data").map {
+var graphs = getDataFromJSON(withName: "chart_data").map {
     convertIntoInternalFormat(from: $0)
 }
 

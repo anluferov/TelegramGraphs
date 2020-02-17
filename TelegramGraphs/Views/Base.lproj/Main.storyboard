@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -32,15 +32,25 @@
                                     <action selector="buttonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="17S-Xy-t4o"/>
                                 </connections>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="TX5-aJ-AP0">
+                                <rect key="frame" x="0.0" y="670" width="414" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="t8P-9V-0oB"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="PoS-1H-20k" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="184" id="0cF-QH-1eJ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="nej-rv-BKT" secondAttribute="bottom" constant="200" id="5zm-C4-Noi"/>
+                            <constraint firstItem="TX5-aJ-AP0" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="6XV-0J-5Kf"/>
                             <constraint firstItem="oFF-Nk-8k6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Pi0-Wg-vuC"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="PoS-1H-20k" secondAttribute="bottom" constant="30" id="RRx-SB-sdm"/>
                             <constraint firstItem="nej-rv-BKT" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="XNo-L9-dvd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="oFF-Nk-8k6" secondAttribute="trailing" constant="20" id="YhC-BW-2T1"/>
+                            <constraint firstItem="TX5-aJ-AP0" firstAttribute="top" secondItem="nej-rv-BKT" secondAttribute="bottom" constant="8" id="dXw-YV-0KZ"/>
+                            <constraint firstItem="TX5-aJ-AP0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="gu6-nk-6YG"/>
                             <constraint firstItem="nej-rv-BKT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="lyq-w1-ga8"/>
                             <constraint firstItem="oFF-Nk-8k6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="og6-e0-Gbk"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PoS-1H-20k" secondAttribute="trailing" constant="184" id="phb-PM-Pqc"/>
@@ -50,6 +60,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="buttonsStackView" destination="TX5-aJ-AP0" id="Kf4-fe-MZG"/>
                         <outlet property="graphView" destination="nej-rv-BKT" id="lyq-uQ-ABc"/>
                     </connections>
                 </viewController>
