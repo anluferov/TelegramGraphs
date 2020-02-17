@@ -37,6 +37,8 @@ class GraphView: UIView {
             } else {
                 drawer.redrawGraph(for: graph, graphWidth, graphHeight, on: self)
             }
+        } else {
+            print("!!!NO GRAPH FOR DRAWING!!!")
         }
     }
 
