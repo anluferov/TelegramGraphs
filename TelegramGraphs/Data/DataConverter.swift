@@ -13,6 +13,8 @@ var graphs = getDataFromJSON(withName: "chart_data").map {
     convertIntoInternalFormat(from: $0)
 }
 
+var graphToDraw = graphs[1]
+
 // Fetching data from JSON
 func getDataFromJSON(withName file: String) -> GraphJSONModel {
     var graphJSON = GraphJSONModel()
@@ -34,7 +36,7 @@ func convertIntoInternalFormat(from data: GraphJSONModelElement) -> Graph {
     dateFormatter.locale = Locale(identifier: "en-US")
     dateFormatter.setLocalizedDateFormatFromTemplate("MMM dd")
 
-    var graphArray = Graph()
+    let graphArray = Graph()
     var nameLine = ""
     var values = [Int]()
     var lines = [Line]()

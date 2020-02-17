@@ -16,29 +16,37 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        graphs[0].lines.forEach {
+        graphToDraw.lines.forEach {
             let button = UIButton()
             let buttonTitle = $0.name ?? "Button"
             button.setTitle(buttonTitle, for: .normal)
             button.backgroundColor = $0.color
             button.layer.cornerRadius = 20
-//            button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+            button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
             buttonsStackView.addArrangedSubview(button)
             buttonsStackView.backgroundColor = .green
         }
     }
 
-    @IBAction func buttonAction(_ sender: Any) {
+    fileprivate func redrawGraph() {
+        graphView.needToRedraw = true
+        graphView.setNeedsDisplay()
+    }
 
-        if graphs[0].lines[0].isHidden  {
-            graphs[0].lines[0].isHidden = false
-        }  else {
-            graphs[0].lines[0].isHidden = true
+    @objc func buttonAction(_ sender: Any) {
+
+        let lineName = (sender as! UIButton).titleLabel?.text
+        let selectedLine = graphToDraw.lines.filter { $0.name == lineName }
+
+        if let selectedLine = selectedLine.first {
+            if selectedLine.isHidden {
+                selectedLine.isHidden = false
+            } else {
+                selectedLine.isHidden = true
+            }
         }
 
-        graphView.needToRedraw = true
-        
-        graphView.setNeedsDisplay()
+        redrawGraph()
     }
 
 }
