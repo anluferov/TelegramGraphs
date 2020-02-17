@@ -25,42 +25,31 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PoS-1H-20k">
-                                <rect key="frame" x="184" y="802" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="buttonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="17S-Xy-t4o"/>
-                                </connections>
-                            </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="TX5-aJ-AP0">
-                                <rect key="frame" x="0.0" y="670" width="414" height="50"/>
-                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="BaV-ob-3rs">
+                                <rect key="frame" x="10" y="670" width="394" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="t8P-9V-0oB"/>
+                                    <constraint firstAttribute="height" constant="50" id="ajS-wk-RiQ"/>
                                 </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="PoS-1H-20k" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="184" id="0cF-QH-1eJ"/>
+                            <constraint firstItem="BaV-ob-3rs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="08g-bY-dSb"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="nej-rv-BKT" secondAttribute="bottom" constant="200" id="5zm-C4-Noi"/>
-                            <constraint firstItem="TX5-aJ-AP0" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="6XV-0J-5Kf"/>
+                            <constraint firstAttribute="trailing" secondItem="BaV-ob-3rs" secondAttribute="trailing" constant="10" id="8QG-fO-kuB"/>
+                            <constraint firstItem="BaV-ob-3rs" firstAttribute="top" secondItem="nej-rv-BKT" secondAttribute="bottom" constant="8" id="Mp2-ik-rDv"/>
                             <constraint firstItem="oFF-Nk-8k6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Pi0-Wg-vuC"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="PoS-1H-20k" secondAttribute="bottom" constant="30" id="RRx-SB-sdm"/>
                             <constraint firstItem="nej-rv-BKT" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="XNo-L9-dvd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="oFF-Nk-8k6" secondAttribute="trailing" constant="20" id="YhC-BW-2T1"/>
-                            <constraint firstItem="TX5-aJ-AP0" firstAttribute="top" secondItem="nej-rv-BKT" secondAttribute="bottom" constant="8" id="dXw-YV-0KZ"/>
-                            <constraint firstItem="TX5-aJ-AP0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="gu6-nk-6YG"/>
                             <constraint firstItem="nej-rv-BKT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="lyq-w1-ga8"/>
                             <constraint firstItem="oFF-Nk-8k6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="og6-e0-Gbk"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PoS-1H-20k" secondAttribute="trailing" constant="184" id="phb-PM-Pqc"/>
                             <constraint firstItem="nej-rv-BKT" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="rez-6c-Kp3"/>
                             <constraint firstItem="nej-rv-BKT" firstAttribute="top" secondItem="oFF-Nk-8k6" secondAttribute="bottom" constant="8" id="upD-DN-T2V"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="buttonsStackView" destination="TX5-aJ-AP0" id="Kf4-fe-MZG"/>
+                        <outlet property="buttonsStackView" destination="BaV-ob-3rs" id="Krv-it-2OL"/>
                         <outlet property="graphView" destination="nej-rv-BKT" id="lyq-uQ-ABc"/>
                     </connections>
                 </viewController>

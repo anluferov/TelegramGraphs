@@ -16,22 +16,16 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        graphs[0].lines.forEach {
-//            let button = UIButton()
-//            let buttonTitle = $0.name ?? "Button"
-//            button.setTitle(buttonTitle, for: .normal)
-////            button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-//            buttonsStackView.addArrangedSubview(button)
-//            buttonsStackView.backgroundColor = .green
-//        }
-
-        buttonsStackView.backgroundColor = .black
-
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        buttonsStackView.backgroundColor = .yellow
+        graphs[0].lines.forEach {
+            let button = UIButton()
+            let buttonTitle = $0.name ?? "Button"
+            button.setTitle(buttonTitle, for: .normal)
+            button.backgroundColor = $0.color
+            button.layer.cornerRadius = 20
+//            button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+            buttonsStackView.addArrangedSubview(button)
+            buttonsStackView.backgroundColor = .green
+        }
     }
 
     @IBAction func buttonAction(_ sender: Any) {
