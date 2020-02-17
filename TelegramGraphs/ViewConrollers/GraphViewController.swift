@@ -8,15 +8,28 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class GraphViewController: UIViewController {
 
     @IBOutlet weak var graphView: GraphView!
     @IBOutlet weak var buttonsStackView: UIStackView!
+
+    var graphToDrawInVC: Graph
+
+    class func instantiate(for graph: Graph) -> GraphViewController {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GraphViewController") as! GraphViewController
+        vc.graphToDrawInVC = graph
+        return vc
+    }
+
+    required init?(coder aDecoder: NSCoder = NSKeyedUnarchiver(forReadingWith: NSData() as Data)) {
+        self.graphToDrawInVC = GraphData.shared.graphs[0]
+        super.init(coder: aDecoder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        graphToDraw.lines.forEach {
+        graphToDrawInVC.lines.forEach {
             let button = UIButton()
             let buttonTitle = $0.name ?? "Button"
             button.setTitle(buttonTitle, for: .normal)
@@ -28,7 +41,7 @@ class ViewController: UIViewController {
         }
     }
 
-    fileprivate func redrawGraph() {
+    func redrawGraph() {
         graphView.needToRedraw = true
         graphView.setNeedsDisplay()
     }
@@ -36,7 +49,7 @@ class ViewController: UIViewController {
     @objc func buttonAction(_ sender: Any) {
 
         let lineName = (sender as! UIButton).titleLabel?.text
-        let selectedLine = graphToDraw.lines.filter { $0.name == lineName }
+        let selectedLine = graphToDrawInVC.lines.filter { $0.name == lineName }
 
         if let selectedLine = selectedLine.first {
             if selectedLine.isHidden {

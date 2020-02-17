@@ -25,18 +25,19 @@ class GraphView: UIView {
 
         let graphWidth = rect.width - 2 * Constant.margin
         let graphHeight = rect.height - Constant.topBorder - Constant.bottomBorder
-        let graph = graphToDraw
+        let graph = GraphData.shared.activeGraph
 
-        drawer.drawHorizontalAxis(for: graph, graphWidth, graphHeight, on: self)
-        drawer.addYAxisLabel(for: graph, graphWidth, graphHeight, on: self)
+        if let graph = graph {
+            drawer.drawHorizontalAxis(for: graph, graphWidth, graphHeight, on: self)
+            drawer.addYAxisLabel(for: graph, graphWidth, graphHeight, on: self)
 
-        if !needToRedraw {
-            drawer.addXAxisLabel(for: graph, graphWidth, graphHeight, on: self)
-            drawer.initGraph(for: graph, graphWidth, graphHeight, on: self)
-        } else {
-            drawer.redrawGraph(for: graph, graphWidth, graphHeight, on: self)
+            if !needToRedraw {
+                drawer.addXAxisLabel(for: graph, graphWidth, graphHeight, on: self)
+                drawer.initGraph(for: graph, graphWidth, graphHeight, on: self)
+            } else {
+                drawer.redrawGraph(for: graph, graphWidth, graphHeight, on: self)
+            }
         }
-
     }
 
 }

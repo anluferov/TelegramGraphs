@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "splashIcon.png",
+      "filename" : "checkbox.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "splashIcon-1.png",
+      "filename" : "checkbox-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "splashIcon-2.png",
+      "filename" : "checkbox-2.png",
       "scale" : "3x"
     }
   ],

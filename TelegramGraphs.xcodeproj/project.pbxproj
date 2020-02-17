@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		CE00B88323D61DAE007685B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B88223D61DAE007685B0 /* AppDelegate.swift */; };
 		CE00B88523D61DAE007685B0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B88423D61DAE007685B0 /* SceneDelegate.swift */; };
-		CE00B88723D61DAE007685B0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B88623D61DAE007685B0 /* ViewController.swift */; };
+		CE00B88723D61DAE007685B0 /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B88623D61DAE007685B0 /* GraphViewController.swift */; };
 		CE00B88A23D61DAE007685B0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE00B88823D61DAE007685B0 /* Main.storyboard */; };
 		CE00B88D23D61DAE007685B0 /* TelegramGraphs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE00B88B23D61DAE007685B0 /* TelegramGraphs.xcdatamodeld */; };
 		CE00B88F23D61DAF007685B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE00B88E23D61DAF007685B0 /* Assets.xcassets */; };
@@ -19,9 +19,11 @@
 		CE2C223C23E6DBD600E2ACF7 /* Drawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C223B23E6DBD600E2ACF7 /* Drawer.swift */; };
 		CE4FFDD623F92A9800DE68D0 /* InternalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4FFDD523F92A9800DE68D0 /* InternalModel.swift */; };
 		CE4FFDD823F92CF300DE68D0 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4FFDD723F92CF300DE68D0 /* Animator.swift */; };
+		CE4FFDE123FAD3C700DE68D0 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4FFDE023FAD3C700DE68D0 /* MainPageViewController.swift */; };
+		CE4FFDE523FAEB0400DE68D0 /* GraphData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4FFDE423FAEB0400DE68D0 /* GraphData.swift */; };
 		CEB9C8CD23F7F60F008A422E /* Collections+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB9C8CC23F7F60F008A422E /* Collections+Extension.swift */; };
 		CEBC918F23D8B3C3007ACD9A /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC918E23D8B3C3007ACD9A /* GraphView.swift */; };
-		CEBC919423D8BFFA007ACD9A /* DataConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC919323D8BFFA007ACD9A /* DataConverter.swift */; };
+		CEBC919423D8BFFA007ACD9A /* GraphConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC919323D8BFFA007ACD9A /* GraphConverter.swift */; };
 		CEBC919823D98F59007ACD9A /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC919723D98F59007ACD9A /* String+Extension.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,7 +31,7 @@
 		CE00B87F23D61DAE007685B0 /* TelegramGraphs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TelegramGraphs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE00B88223D61DAE007685B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE00B88423D61DAE007685B0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CE00B88623D61DAE007685B0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CE00B88623D61DAE007685B0 /* GraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
 		CE00B88923D61DAE007685B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CE00B88C23D61DAE007685B0 /* TelegramGraphs.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TelegramGraphs.xcdatamodel; sourceTree = "<group>"; };
 		CE00B88E23D61DAF007685B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -40,9 +42,11 @@
 		CE2C223B23E6DBD600E2ACF7 /* Drawer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drawer.swift; sourceTree = "<group>"; };
 		CE4FFDD523F92A9800DE68D0 /* InternalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalModel.swift; sourceTree = "<group>"; };
 		CE4FFDD723F92CF300DE68D0 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
+		CE4FFDE023FAD3C700DE68D0 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
+		CE4FFDE423FAEB0400DE68D0 /* GraphData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphData.swift; sourceTree = "<group>"; };
 		CEB9C8CC23F7F60F008A422E /* Collections+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collections+Extension.swift"; sourceTree = "<group>"; };
 		CEBC918E23D8B3C3007ACD9A /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
-		CEBC919323D8BFFA007ACD9A /* DataConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataConverter.swift; sourceTree = "<group>"; };
+		CEBC919323D8BFFA007ACD9A /* GraphConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphConverter.swift; sourceTree = "<group>"; };
 		CEBC919723D98F59007ACD9A /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,10 +83,10 @@
 				CEBC919923D98F63007ACD9A /* Extensions */,
 				CE00B89923D61E2B007685B0 /* Data */,
 				CEBC919023D8B3EE007ACD9A /* Views */,
+				CE4FFDDD23FAD32A00DE68D0 /* ViewConrollers */,
 				CE2C223A23E6DBB800E2ACF7 /* Drawer */,
 				CE00B88223D61DAE007685B0 /* AppDelegate.swift */,
 				CE00B88423D61DAE007685B0 /* SceneDelegate.swift */,
-				CE00B88623D61DAE007685B0 /* ViewController.swift */,
 				CE00B88E23D61DAF007685B0 /* Assets.xcassets */,
 				CE00B89023D61DAF007685B0 /* LaunchScreen.storyboard */,
 				CE00B89323D61DAF007685B0 /* Info.plist */,
@@ -96,7 +100,8 @@
 			children = (
 				CE00B89A23D61E38007685B0 /* JSONModel.swift */,
 				CE4FFDD523F92A9800DE68D0 /* InternalModel.swift */,
-				CEBC919323D8BFFA007ACD9A /* DataConverter.swift */,
+				CEBC919323D8BFFA007ACD9A /* GraphConverter.swift */,
+				CE4FFDE423FAEB0400DE68D0 /* GraphData.swift */,
 				CE00B89D23D622AC007685B0 /* chart_data.json */,
 			);
 			path = Data;
@@ -109,6 +114,15 @@
 				CE4FFDD723F92CF300DE68D0 /* Animator.swift */,
 			);
 			path = Drawer;
+			sourceTree = "<group>";
+		};
+		CE4FFDDD23FAD32A00DE68D0 /* ViewConrollers */ = {
+			isa = PBXGroup;
+			children = (
+				CE00B88623D61DAE007685B0 /* GraphViewController.swift */,
+				CE4FFDE023FAD3C700DE68D0 /* MainPageViewController.swift */,
+			);
+			path = ViewConrollers;
 			sourceTree = "<group>";
 		};
 		CEBC919023D8B3EE007ACD9A /* Views */ = {
@@ -202,12 +216,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE4FFDD823F92CF300DE68D0 /* Animator.swift in Sources */,
-				CEBC919423D8BFFA007ACD9A /* DataConverter.swift in Sources */,
-				CE00B88723D61DAE007685B0 /* ViewController.swift in Sources */,
+				CEBC919423D8BFFA007ACD9A /* GraphConverter.swift in Sources */,
+				CE00B88723D61DAE007685B0 /* GraphViewController.swift in Sources */,
 				CE00B88D23D61DAE007685B0 /* TelegramGraphs.xcdatamodeld in Sources */,
 				CE00B88323D61DAE007685B0 /* AppDelegate.swift in Sources */,
 				CE2C223C23E6DBD600E2ACF7 /* Drawer.swift in Sources */,
 				CE00B88523D61DAE007685B0 /* SceneDelegate.swift in Sources */,
+				CE4FFDE523FAEB0400DE68D0 /* GraphData.swift in Sources */,
+				CE4FFDE123FAD3C700DE68D0 /* MainPageViewController.swift in Sources */,
 				CE00B89B23D61E38007685B0 /* JSONModel.swift in Sources */,
 				CEBC918F23D8B3C3007ACD9A /* GraphView.swift in Sources */,
 				CEBC919823D98F59007ACD9A /* String+Extension.swift in Sources */,
