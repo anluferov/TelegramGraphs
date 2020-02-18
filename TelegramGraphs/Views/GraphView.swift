@@ -28,15 +28,19 @@ class GraphView: UIView {
         let graph = GraphData.shared.activeGraph
 
         if let graph = graph {
+            if let selectedLine = selectedLine {
+                 drawer.redrawLineForGraph(selectedLine, for: graph, graphWidth, graphHeight, on: self)
+             } else {
+                //avoid case when adding duplicate layer after reopen VC
+                 if self.layer.sublayers == nil {
+                     drawer.addXAxisLabel(for: graph, graphWidth, graphHeight, on: self)
+                     drawer.initGraph(for: graph, graphWidth, graphHeight, on: self)
+                 }
+             }
+
             drawer.drawHorizontalAxis(for: graph, graphWidth, graphHeight, on: self)
             drawer.addYAxisLabel(for: graph, graphWidth, graphHeight, on: self)
 
-            if let selectedLine = selectedLine {
-                drawer.redrawLineForGraph(selectedLine, for: graph, graphWidth, graphHeight, on: self)
-            } else {
-                drawer.addXAxisLabel(for: graph, graphWidth, graphHeight, on: self)
-                drawer.initGraph(for: graph, graphWidth, graphHeight, on: self)
-            }
         } else {
             print("!!!NO GRAPH FOR DRAWING!!!")
         }
