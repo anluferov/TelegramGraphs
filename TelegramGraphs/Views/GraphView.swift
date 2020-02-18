@@ -19,7 +19,7 @@ struct Constant {
 class GraphView: UIView {
 
     let drawer = Drawer()
-    var needToRedraw = false
+    var selectedLine: Line?
 
     override func draw(_ rect: CGRect) {
 
@@ -31,15 +31,17 @@ class GraphView: UIView {
             drawer.drawHorizontalAxis(for: graph, graphWidth, graphHeight, on: self)
             drawer.addYAxisLabel(for: graph, graphWidth, graphHeight, on: self)
 
-            if !needToRedraw {
+            if let selectedLine = selectedLine {
+                drawer.redrawLineForGraph(selectedLine, for: graph, graphWidth, graphHeight, on: self)
+            } else {
                 drawer.addXAxisLabel(for: graph, graphWidth, graphHeight, on: self)
                 drawer.initGraph(for: graph, graphWidth, graphHeight, on: self)
-            } else {
-                drawer.redrawGraph(for: graph, graphWidth, graphHeight, on: self)
             }
         } else {
             print("!!!NO GRAPH FOR DRAWING!!!")
         }
+
+        selectedLine = nil
     }
 
 }

@@ -98,7 +98,7 @@ class Drawer {
         }
     }
 
-    func redrawGraph(for graph: Graph, _ graphWidth: CGFloat, _ graphHeight: CGFloat, on view: UIView) {
+    func redrawLineForGraph(_ line: Line, for graph: Graph, _ graphWidth: CGFloat, _ graphHeight: CGFloat, on view: UIView) {
 
         //filter hidden and not hidden graphs for drawing
         let notHiddenLines = getLines(from: graph, type: .notHidden)
@@ -146,13 +146,17 @@ class Drawer {
         }
 
         //hide all firstly hidden lines
-        hiddenLines.forEach {
-            if let subLayer = linesLayers[safe: $0.layerIndex] {
+        if let line = hiddenLines.first(where: {$0 === line}) {
+            if let subLayer = linesLayers[safe: line.layerIndex] {
                 subLayer.opacity = 0.0
                 animator.animateDisappear(on: subLayer, duration: 0.5)
             }
-
         }
+
+//        if let subLayer = linesLayers[safe: line.layerIndex] {
+//            subLayer.opacity = 0.0
+//            animator.animateDisappear(on: subLayer, duration: 0.5)
+//        }
     }
 
     //MARK: - drawing of coordinate axes

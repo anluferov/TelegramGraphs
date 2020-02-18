@@ -41,8 +41,8 @@ class GraphViewController: UIViewController {
         }
     }
 
-    func redrawGraph() {
-        graphView.needToRedraw = true
+    func redrawGraphForLine(_ line: Line) {
+        graphView.selectedLine = line
         graphView.setNeedsDisplay()
     }
 
@@ -57,10 +57,8 @@ class GraphViewController: UIViewController {
             } else {
                 selectedLine.isHidden = true
             }
+            redrawGraphForLine(selectedLine)
         }
-
-        redrawGraph()
     }
-
 }
 
