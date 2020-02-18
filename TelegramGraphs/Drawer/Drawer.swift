@@ -161,6 +161,11 @@ class Drawer {
         //filter hidden and not hidden graphs for drawing
         let notHiddenLines = getLines(from: graph, type: .notHidden)
 
+        //if all lines are disables - nothing to do
+        guard !notHiddenLines.isEmpty else {
+            return
+        }
+
         //calculate max Y point for all not hidden lines in graph
         let maxYPoint = getMaxYPoint(for: notHiddenLines)
 
@@ -208,6 +213,11 @@ class Drawer {
 
         //filter hidden and not hidden graphs for drawing
         let notHiddenLines = getLines(from: graph, type: .notHidden)
+
+        //if all lines are disables - nothing to do
+        guard !notHiddenLines.isEmpty else {
+            return
+        }
 
         //calculate max Y point for all not hidden lines in graph
         let maxYPoint = getMaxYPoint(for: notHiddenLines)
