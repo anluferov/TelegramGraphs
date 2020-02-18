@@ -48,14 +48,17 @@ class GraphViewController: UIViewController {
 
     @objc func buttonAction(_ sender: Any) {
 
-        let lineName = (sender as! UIButton).titleLabel?.text
+        let selectedButton = (sender as! UIButton)
+        let lineName = selectedButton.titleLabel?.text
         let selectedLine = graphToDrawInVC.lines.filter { $0.name == lineName }
 
         if let selectedLine = selectedLine.first {
             if selectedLine.isHidden {
                 selectedLine.isHidden = false
+                selectedButton.backgroundColor = selectedLine.color
             } else {
                 selectedLine.isHidden = true
+                selectedButton.backgroundColor = .lightGray
             }
             redrawGraphForLine(selectedLine)
         }

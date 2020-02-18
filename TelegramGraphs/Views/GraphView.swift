@@ -22,7 +22,7 @@ class GraphView: UIView {
     var selectedLine: Line?
 
     override func draw(_ rect: CGRect) {
-
+        
         let graphWidth = rect.width - 2 * Constant.margin
         let graphHeight = rect.height - Constant.topBorder - Constant.bottomBorder
         let graph = GraphData.shared.activeGraph
