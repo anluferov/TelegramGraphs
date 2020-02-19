@@ -28,7 +28,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Followers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oFF-Nk-8k6">
-                                <rect key="frame" x="20" y="44" width="374" height="42"/>
+                                <rect key="frame" x="20" y="44" width="374" height="26.5"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -45,14 +45,13 @@
                             <constraint firstItem="BaV-ob-3rs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="08g-bY-dSb"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="nej-rv-BKT" secondAttribute="bottom" constant="200" id="5zm-C4-Noi"/>
                             <constraint firstAttribute="trailing" secondItem="BaV-ob-3rs" secondAttribute="trailing" constant="10" id="8QG-fO-kuB"/>
+                            <constraint firstItem="nej-rv-BKT" firstAttribute="top" secondItem="oFF-Nk-8k6" secondAttribute="bottom" constant="23.5" id="Hmv-Mu-qNT"/>
                             <constraint firstItem="BaV-ob-3rs" firstAttribute="top" secondItem="nej-rv-BKT" secondAttribute="bottom" constant="30" id="Mp2-ik-rDv"/>
                             <constraint firstItem="oFF-Nk-8k6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Pi0-Wg-vuC"/>
                             <constraint firstItem="nej-rv-BKT" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="XNo-L9-dvd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="oFF-Nk-8k6" secondAttribute="trailing" constant="20" id="YhC-BW-2T1"/>
                             <constraint firstItem="nej-rv-BKT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="lyq-w1-ga8"/>
                             <constraint firstItem="oFF-Nk-8k6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="og6-e0-Gbk"/>
-                            <constraint firstItem="nej-rv-BKT" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="rez-6c-Kp3"/>
-                            <constraint firstItem="nej-rv-BKT" firstAttribute="top" secondItem="oFF-Nk-8k6" secondAttribute="bottom" constant="8" id="upD-DN-T2V"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

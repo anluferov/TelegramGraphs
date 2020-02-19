@@ -13,23 +13,18 @@ class GraphViewController: UIViewController {
     @IBOutlet weak var graphView: GraphView!
     @IBOutlet weak var buttonsStackView: UIStackView!
 
-    var graphToDrawInVC: Graph
+    var graphToDrawInVC: Graph?
 
     class func instantiate(for graph: Graph) -> GraphViewController {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GraphViewController") as! GraphViewController
         vc.graphToDrawInVC = graph
         return vc
     }
-
-    required init?(coder aDecoder: NSCoder = NSKeyedUnarchiver(forReadingWith: NSData() as Data)) {
-        self.graphToDrawInVC = GraphData.shared.graphs[0]
-        super.init(coder: aDecoder)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        graphToDrawInVC.lines.forEach {
+        graphToDrawInVC!.lines.forEach {
             let button = UIButton()
             let buttonTitle = $0.name ?? "Button"
             button.setTitle(buttonTitle, for: .normal)
@@ -41,16 +36,17 @@ class GraphViewController: UIViewController {
         }
     }
 
-    func redrawGraphForLine(_ line: Line) {
+    private func redrawGraphForLine(_ line: Line) {
         graphView.selectedLine = line
         graphView.setNeedsDisplay()
     }
 
-    @objc func buttonAction(_ sender: Any) {
+    @objc func buttonAction(_ sender: UIButton) {
 
-        let selectedButton = (sender as! UIButton)
+        let selectedButton = sender
         let lineName = selectedButton.titleLabel?.text
-        let selectedLine = graphToDrawInVC.lines.filter { $0.name == lineName }
+        
+        let selectedLine = graphToDrawInVC!.lines.filter { $0.name == lineName }
 
         if let selectedLine = selectedLine.first {
             if selectedLine.isHidden {

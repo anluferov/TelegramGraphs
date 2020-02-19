@@ -204,12 +204,11 @@ class Drawer {
         horizontalAxisLayer.lineWidth = 0.5
         horizontalAxisLayer.fillColor = nil
         horizontalAxisLayer.opacity = 0.6
-        if let oldPath = horizontalAxisLayer.path {
-            animator.animateChangingPath(from: oldPath, to: horizontalLines.cgPath, on: horizontalAxisLayer, duration: 0.5)
+        if let _ = horizontalAxisLayer.path {
+//            animator.animateChangingPath(from: oldPath, to: horizontalLines.cgPath, on: horizontalAxisLayer, duration: 0.5)
             horizontalAxisLayer.path = horizontalLines.cgPath
         } else {
             horizontalAxisLayer.path = horizontalLines.cgPath
-
             //add layer with grid on view
             view.layer.addSublayer(horizontalAxisLayer)
         }
@@ -341,34 +340,6 @@ class Drawer {
             view.layer.addSublayer(labelLayer)
         }
     }
-
-    //MARK: - functions for tests
-    func makeTestGraph(on view: UIView, lineLayer: CAShapeLayer) {
-        let linePath = UIBezierPath()
-        linePath.move(to: CGPoint(x: 100, y: 100))
-        linePath.addLine(to: CGPoint(x: 400, y: 100))
-
-        lineLayer.path = linePath.cgPath
-        lineLayer.fillColor = nil
-        lineLayer.opacity = 1.0
-        lineLayer.strokeColor = UIColor.blue.cgColor
-        view.layer.addSublayer(lineLayer)
-    }
-
-    func redrawTestGraph(on view: UIView, lineLayer: CAShapeLayer) {
-        let linePath = UIBezierPath()
-        linePath.move(to: CGPoint(x: 100, y: 200))
-        linePath.addLine(to: CGPoint(x: 400, y: 200))
-
-        let animation = CABasicAnimation(keyPath: "path")
-        animation.duration = 1.0
-        animation.fromValue = lineLayer.path
-        animation.toValue = linePath.cgPath
-        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName(rawValue: "easeInEaseOut"))
-
-        lineLayer.add(animation, forKey: "path")
-    }
-
 }
 
 

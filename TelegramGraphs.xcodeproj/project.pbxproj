@@ -11,7 +11,6 @@
 		CE00B88523D61DAE007685B0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B88423D61DAE007685B0 /* SceneDelegate.swift */; };
 		CE00B88723D61DAE007685B0 /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B88623D61DAE007685B0 /* GraphViewController.swift */; };
 		CE00B88A23D61DAE007685B0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE00B88823D61DAE007685B0 /* Main.storyboard */; };
-		CE00B88D23D61DAE007685B0 /* TelegramGraphs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE00B88B23D61DAE007685B0 /* TelegramGraphs.xcdatamodeld */; };
 		CE00B88F23D61DAF007685B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE00B88E23D61DAF007685B0 /* Assets.xcassets */; };
 		CE00B89223D61DAF007685B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE00B89023D61DAF007685B0 /* LaunchScreen.storyboard */; };
 		CE00B89B23D61E38007685B0 /* JSONModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B89A23D61E38007685B0 /* JSONModel.swift */; };
@@ -33,7 +32,6 @@
 		CE00B88423D61DAE007685B0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CE00B88623D61DAE007685B0 /* GraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
 		CE00B88923D61DAE007685B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		CE00B88C23D61DAE007685B0 /* TelegramGraphs.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TelegramGraphs.xcdatamodel; sourceTree = "<group>"; };
 		CE00B88E23D61DAF007685B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE00B89123D61DAF007685B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE00B89323D61DAF007685B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -90,7 +88,6 @@
 				CE00B88E23D61DAF007685B0 /* Assets.xcassets */,
 				CE00B89023D61DAF007685B0 /* LaunchScreen.storyboard */,
 				CE00B89323D61DAF007685B0 /* Info.plist */,
-				CE00B88B23D61DAE007685B0 /* TelegramGraphs.xcdatamodeld */,
 			);
 			path = TelegramGraphs;
 			sourceTree = "<group>";
@@ -218,7 +215,6 @@
 				CE4FFDD823F92CF300DE68D0 /* Animator.swift in Sources */,
 				CEBC919423D8BFFA007ACD9A /* GraphConverter.swift in Sources */,
 				CE00B88723D61DAE007685B0 /* GraphViewController.swift in Sources */,
-				CE00B88D23D61DAE007685B0 /* TelegramGraphs.xcdatamodeld in Sources */,
 				CE00B88323D61DAE007685B0 /* AppDelegate.swift in Sources */,
 				CE2C223C23E6DBD600E2ACF7 /* Drawer.swift in Sources */,
 				CE00B88523D61DAE007685B0 /* SceneDelegate.swift in Sources */,
@@ -424,19 +420,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		CE00B88B23D61DAE007685B0 /* TelegramGraphs.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				CE00B88C23D61DAE007685B0 /* TelegramGraphs.xcdatamodel */,
-			);
-			currentVersion = CE00B88C23D61DAE007685B0 /* TelegramGraphs.xcdatamodel */;
-			path = TelegramGraphs.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = CE00B87723D61DAE007685B0 /* Project object */;
 }

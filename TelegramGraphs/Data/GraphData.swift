@@ -12,6 +12,8 @@ class GraphData {
 
     static let shared = GraphData()
 
+    private init () { }
+
     //data with graph info from json in internal format
     var graphs = GraphConverter().convertIntoInternalFormatFromJson(withName: "chart_data")
 
