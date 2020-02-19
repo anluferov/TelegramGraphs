@@ -159,35 +159,43 @@ class Drawer {
 //        }
     }
 
-    //MARK: - drawing of coordinate axes
-    func drawHorizontalAxis(for graph: Graph, _ graphWidth: CGFloat, _ graphHeight: CGFloat, on view: UIView) {
+    //MARK: - drawing of coordinate axes. return array with Y position of axis
 
-        //filter hidden and not hidden graphs for drawing
-        let notHiddenLines = getLines(from: graph, type: .notHidden)
+    private func calculateAxisPositions(_ graphHeight: CGFloat) -> [CGFloat] {
 
-        //if all lines are disables - nothing to do
-        guard !notHiddenLines.isEmpty else {
-            return
-        }
+        //calculate coordinate of top and lower lines
+        let indentTopLineInPercent = 0.05
+        let indentTopLine = graphHeight * CGFloat(indentTopLineInPercent)
+        let topYAxisPosition = Constant.bottomBorder + indentTopLine
+        let lowerYAxisPosition = Constant.bottomBorder + graphHeight
 
-        //calculate max Y point for all not hidden lines in graph
-        let maxYPoint = getMaxYPoint(for: notHiddenLines)
+        //calculate spacing
+        let spacing = (lowerYAxisPosition - topYAxisPosition) / CGFloat(Constant.countHorizontalLine-1)
 
         //create array of Y position for dX axis
         var yPositionArray = [CGFloat]()
-        let ySpacing = CGFloat(maxYPoint / Constant.countHorizontalLine) * (graphHeight / CGFloat(maxYPoint))
-        var yPosition = Constant.topBorder + graphHeight
+        var yAxisPosition = lowerYAxisPosition
         for _ in 0..<Constant.countHorizontalLine {
-            yPositionArray.append(yPosition)
-            yPosition -= ySpacing
+            yPositionArray.append(yAxisPosition)
+            yAxisPosition -= spacing
         }
 
+        return yPositionArray
+    }
+
+    func drawHorizontalAxis(for graph: Graph, _ graphWidth: CGFloat, _ graphHeight: CGFloat, on view: UIView) {
+
+        //get array of Y position for axis
+        let yPositionArray = calculateAxisPositions(graphHeight)
+
         //draw all horizontal lines and append their to final UIBezierPath
+        let xPositionStartLine = Constant.margin
+        let xPositionEndLine = Constant.margin + graphWidth
         let horizontalLines = UIBezierPath()
         yPositionArray.forEach {
             let horizontalLine = UIBezierPath()
-            horizontalLine.move(to: CGPoint(x: Constant.margin, y: $0))
-            horizontalLine.addLine(to: CGPoint(x: Constant.margin + graphWidth, y: $0))
+            horizontalLine.move(to: CGPoint(x: xPositionStartLine, y: $0))
+            horizontalLine.addLine(to: CGPoint(x: xPositionEndLine, y: $0))
             horizontalLines.append(horizontalLine)
         }
 
@@ -209,6 +217,9 @@ class Drawer {
 
     func addYAxisLabel(for graph: Graph, _ graphWidth: CGFloat, _ graphHeight: CGFloat, on view: UIView) {
 
+        //get array of Y position for axis
+        let yPositionArray = calculateAxisPositions(graphHeight)
+
         //size and indents for labels on dY
         let labelWidth = CGFloat(100)
         let labelHeight = CGFloat(15)
@@ -223,22 +234,23 @@ class Drawer {
             return
         }
 
-        //calculate max Y point for all not hidden lines in graph
+        //calculate label value on top axis and spacing for other values
         let maxYPoint = getMaxYPoint(for: notHiddenLines)
+        let topAxisYCoord = yPositionArray.min()!
+        let topAxisLabel = (graphHeight + Constant.topBorder - topAxisYCoord) / (graphHeight / CGFloat(maxYPoint))
 
-        //calculate spacing
-        let spacingCount = Constant.countHorizontalLine
-        let spacing = CGFloat(maxYPoint / Constant.countHorizontalLine) * (graphHeight / CGFloat(maxYPoint))
-        let spacingForValues = maxYPoint / spacingCount
+        let spacingCount = Constant.countHorizontalLine - 1
+        let spacingForValues = Int(topAxisLabel) / spacingCount
 
         //calculate coordinate of labels for dY and their values
-        var labelInfoArray = [(xCoord: CGFloat, yCoord: CGFloat, value: Int)]()
         let labelXPosition = Constant.margin + labelShiftX
-        var labelYPosition = Constant.topBorder + graphHeight - labelShiftY
+        var labelInfoArray = [(xCoord: CGFloat, yCoord: CGFloat, value: Int)]()
         var labelText = 0
-        for _ in 0..<spacingCount {
+
+        //calculate array with coordinate of Y label and their values
+        yPositionArray.forEach {
+            let labelYPosition = $0 - labelShiftY
             labelInfoArray.append((labelXPosition,labelYPosition,labelText))
-            labelYPosition -= spacing
             labelText += spacingForValues
         }
 
