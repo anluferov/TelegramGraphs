@@ -9,6 +9,11 @@
 import Foundation
 import UIKit
 
+enum TypeOfChangeAxis {
+    case up
+    case down
+}
+
 class Animator {
 
     //animate changing path (position of graphs)
@@ -40,6 +45,10 @@ class Animator {
         opacityAnimation.duration = duration
 
         layer.add(opacityAnimation, forKey: nil)
+    }
+
+    func animateChangeAxis(from oldValue: CGPath, to newValue: CGPath, on layer: CAShapeLayer, duration: Double, _ type: TypeOfChangeAxis) {
+
     }
 
 
